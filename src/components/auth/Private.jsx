@@ -7,7 +7,7 @@ function Private(props) {
   const { isLoggedIn } = useContext(AuthContext)
 
   if (isLoggedIn) {
-    return props.children // adelante, bienvenido a está página privada
+    return props.children
   } else {
     return <Navigate to={"/login"}/>
   }

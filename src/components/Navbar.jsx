@@ -6,7 +6,7 @@ import { spread } from "axios";
 function Navbar() {
 
   const navigate = useNavigate()
-  const { isLoggedIn, authenticateUser } = useContext(AuthContext)
+  const { isLoggedIn, loggedUserId, authenticateUser } = useContext(AuthContext)
 
   const handleLogout = async () => {
 
@@ -29,7 +29,9 @@ function Navbar() {
       <Link to="/">Home</Link>
       { !isLoggedIn && <Link to="/signup">Registro</Link> }
       { !isLoggedIn && <Link to="/login">Acceso</Link> }
-      { isLoggedIn &&<Link to="/my-page">Top Secret Info</Link> }
+      {/* { isLoggedIn &&<Link to={`/my-page/${loggedUserId}`}>Top Secret Info</Link> } */}
+      { isLoggedIn &&<Link to={`/my-page`}>Top Secret Info</Link> }
+
       { isLoggedIn &&<Link onClick={handleLogout}>Cerrar sesión</Link> }
 
     </nav>

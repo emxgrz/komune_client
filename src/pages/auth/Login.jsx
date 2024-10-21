@@ -34,7 +34,7 @@ function Login() {
 
       await authenticateUser()
 
-      navigate("/private-page-example")
+      navigate("/my-page")
 
     } catch (error) {
       console.log(error)
