@@ -1,17 +1,30 @@
 import "./App.css";
 import { Routes, Route } from "react-router";
+import Private from "./components/auth/Private";
 
-import HomePage from "./pages/HomePage"
+import Navbar from "./components/Navbar"
+
+
+import EnterPage from "./pages/EnterPage";
 import Login from "./pages/auth/Login"
 import Signup from "./pages/auth/Signup"
-import ProfilePage from "./pages/ProfilePage";
-import UserDetails from "./pages/UserDetails";
-import Navbar from "./components/Navbar"
-import Private from "./components/auth/Private";
-import WorkDetails from "./pages/WorkDetails";
 import OurMission from "./pages/OurMission";
-import EnterPage from "./pages/EnterPage";
+
+import ProfilePage from "./pages/ProfilePage";
+
 import SearchPage from "./pages/SearchPage";
+import HomePage from "./pages/HomePage"
+
+import WorkDetails from "./pages/WorkDetails";
+import CreateWorkForm from "./components/work/CreateWorkForm";
+
+import ReviewDetails from "./pages/ReviewDetails";
+import CreateReviewForm from "./components/review/CreateReviewForm";
+
+import TransactionPage from "./pages/TransactionPage";
+import CreateTransactionForm from "./components/transactions/CreateTransactionForm";
+import TransactionDetails from "./pages/TransactionDetails";
+
 
 function App() {
 
@@ -26,14 +39,25 @@ function App() {
         <Route path="/" element={<EnterPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-
-        <Route path="/my-page/:userId" element={ <Private> <ProfilePage/> </Private> } />
-        <Route path="/profiles/:userId" element={<ProfilePage />} />
-        <Route path="/work/:id" element={<WorkDetails />} />
         <Route path="/our-mission" element={<OurMission />} />
 
-        <Route path="/search" element={<SearchPage />} />
 
+        {/* Once inside de web, private */}
+        <Route path="/my-page/:userId" element={ <Private> <ProfilePage/> </Private> } />
+        <Route path="/profiles/:userId" element={<ProfilePage />} />
+
+        <Route path="/search" element={ <Private> <SearchPage /> </Private> } />
+        <Route path="/home" element={ <Private> <HomePage /> </Private> } />
+
+        <Route path="/work/:id" element={<Private> <WorkDetails /> </Private>} />
+        <Route path="/work-form" element={<Private> <CreateWorkForm /> </Private>} />
+
+        <Route path="/review/:id" element={<Private> <ReviewDetails /> </Private>} />
+        <Route path="/review-form" element={<Private> <CreateReviewForm /> </Private>} />
+
+        <Route path="/my-transactions" element={<Private> <TransactionPage /> </Private>} />
+        <Route path="/transaction/:id" element={<Private> <TransactionDetails /> </Private>} />
+        <Route path="/transaction-form" element={<Private> <CreateTransactionForm /> </Private>} />
 
 
       </Routes>

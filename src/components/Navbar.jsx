@@ -35,10 +35,12 @@ function Navbar() {
       { !isLoggedIn && <Link to="/signup">Registro</Link> }
       { !isLoggedIn && <Link to="/login">Acceso</Link> }
       
+      { isLoggedIn &&<Link to={`/home`}>Home</Link> }
+      { isLoggedIn &&<Link to={`/search`}>search</Link> }
+      { isLoggedIn &&<Link to={`/my-transactions`}>transactions</Link> }
 
-      { isLoggedIn &&<Link to={`/my-page/${loggedUserId}`}>Top Secret Info</Link> }
-      {/* { !isLoggedIn &&<Link to={`/profiles/${userId}`}>Other id</Link>} */}
-      { userId && <Link to={`/profiles/${userId}`}>Other id</Link> }
+      { isLoggedIn &&<Link to={`/my-page/${loggedUserId}`}>Mi perfil</Link> }
+      
       { isLoggedIn &&<Link onClick={handleLogout}>Cerrar sesión</Link> }
       { isLoggedIn &&<Link to="/search">Search work</Link> }
 

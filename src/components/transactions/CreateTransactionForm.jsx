@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import service from "../services/config"; 
+import service from "../../services/config"; 
 import { AuthContext } from "../../context/auth.context"; 
 
 function CreateTransactionForm() {
