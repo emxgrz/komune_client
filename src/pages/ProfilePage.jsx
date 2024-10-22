@@ -1,15 +1,10 @@
-import UserCard from "../components/user/UserDetails.jsx"
-
+import React from 'react'
+import UserDetails from './UserDetails'
 
 export default function ProfilePage() {
-  
-
-
   return (
     <div>
-      <UserCard/>
+      <UserDetails/>
     </div>
-  );
+  )
 }
-
-

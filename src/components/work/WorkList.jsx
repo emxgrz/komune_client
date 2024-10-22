@@ -1,8 +1,11 @@
 import React from 'react'
+import ServiceCard from './ServiceCard.JSX'
 
 function ServiceList() {
   return (
-    <div>ServiceList</div>
+    <div>
+      <ServiceCard/>
+    </div>
   )
 }
 

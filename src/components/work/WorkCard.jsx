@@ -1,9 +1,7 @@
 import React from 'react'
 
-function ServiceCard() {
+export default function ServiceCard() {
   return (
     <div>ServiceCard</div>
   )
 }
-
-export default ServiceCard
