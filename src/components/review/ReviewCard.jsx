@@ -1,13 +1,17 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+
 
 export default function ReviewCard({ reviewer, reviewed, transaction, rating, comment }) {
   return (
-    <div>
-      <h3>Reseña de: {reviewer}</h3>
-      <p>Reseña para: {reviewed}</p>
-      <p>Transacción: {transaction}</p>
-      <p>Calificación: {rating}</p>
-      <p>Comentario: {comment}</p>
+    <div style={{ cursor: 'pointer', border: '1px solid #ccc', padding: '10px', margin: '10px' }}>
+      <Link to={`/reviews/${_id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+        <h3>Reseña de: {reviewer.username}</h3> 
+        <p>Reseña para: {reviewed.username}</p> 
+        <p>Transacción: {transaction.description}</p> 
+        <p>Calificación: {rating}</p>
+        <p>Comentario: {comment}</p>
+      </Link>
     </div>
   )
 }
