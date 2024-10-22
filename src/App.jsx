@@ -26,7 +26,7 @@ function App() {
 
         <Route path="/my-page/:userId" element={ <Private> <ProfilePage/> </Private> } />
         <Route path="/profiles/:userId" element={<ProfilePage />} />
-        <Route path="/work/:userId" element={<WorkDetails />} />
+        <Route path="/work/:id" element={<WorkDetails />} />
 
 
 

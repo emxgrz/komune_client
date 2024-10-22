@@ -7,16 +7,17 @@ function ServiceDetails() {
   const [works, setWorks] = useState([]); 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { userId } = useParams(); 
+  const { id } = useParams(); 
 
   useEffect(() => {
     const fetchWorks = async () => {
       try {
-        const response = await service.get(`/service/user/${userId}`); 
+        const response = await service.get(`/work/${id}`); 
         console.log(response.data);
-        setWorks(response.data); 
+        setWorks(response.data);
+        console.log(works) 
       } catch (error) {
-        setError('No se encontraron servicios para este profesional.');
+        setError('No se encontraron servicios.');
         console.error(error);
       } finally {
         setLoading(false);
@@ -24,7 +25,7 @@ function ServiceDetails() {
     };
 
     fetchWorks();
-  }, [userId]); // Dependencia del ID del usuario
+  }, [id]); 
 
   if (loading) {
     return <p>Cargando...</p>;
@@ -36,20 +37,18 @@ function ServiceDetails() {
 
   return (
     <div>
-      <h2>Servicios del Profesional</h2>
-      {works.length > 0 ? (
-        <ul>
-          {works.map((work) => (
-            <li key={work._id}>
-              <h3>{work.title}</h3> 
-              <p>Descripción: {work.description}</p> 
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No hay servicios disponibles para este profesional.</p>
-      )}
-    </div>
+    <h2>Servicios</h2>
+    {works ? ( 
+      <ul>
+        <li key={works._id}>
+          <h3>{works.title}</h3>
+          <p>Descripción: {works.description}</p>
+        </li>
+      </ul>
+    ) : (
+      <p>No hay servicios disponibles para este profesional.</p>
+    )}
+  </div>
   );
 }
 
