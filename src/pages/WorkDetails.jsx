@@ -28,7 +28,7 @@ function WorkDetails() {
         setFormData({
           title: response.data.title,
           description: response.data.description,
-          skills: response.data.skills || [], // Por si skills es null
+          skills: response.data.skills || [], 
         });
       } catch (error) {
         setError('Error al cargar los detalles del trabajo');
@@ -40,14 +40,13 @@ function WorkDetails() {
     fetchWork();
   }, [id]);
 
-  // Función para manejar la edición
   const handleEdit = async (e) => {
-    e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+    e.preventDefault(); 
     if (loggedUserId === work.professional._id) {
       try {
-        const response = await service.put(`/work/${id}`, formData); // Ruta para editar el trabajo
-        setWork(response.data); // Actualiza el trabajo con los nuevos datos
-        setIsEditing(false); // Salir del modo edición
+        const response = await service.put(`/work/${id}`, formData); 
+        setWork(response.data); 
+        setIsEditing(false); 
         alert('Trabajo actualizado con éxito');
       } catch (error) {
         console.error('Error al editar el trabajo:', error);
@@ -58,15 +57,14 @@ function WorkDetails() {
     }
   };
 
-  // Función para manejar la eliminación
   const handleDelete = async () => {
     if (loggedUserId === work.professional._id) {
       const confirmDelete = window.confirm('¿Estás seguro de que deseas eliminar este trabajo?');
       if (confirmDelete) {
         try {
-          await service.delete(`/work/${id}`); // Ruta para eliminar el trabajo
+          await service.delete(`/work/${id}`); 
           alert('Trabajo eliminado con éxito');
-          navigate('/works'); // Redirigir a la lista de trabajos o alguna otra página
+          navigate('/works'); 
         } catch (error) {
           console.error('Error al eliminar el trabajo:', error);
           alert('Hubo un error al eliminar el trabajo.');
@@ -77,7 +75,6 @@ function WorkDetails() {
     }
   };
 
-  // Función para manejar el cambio de valores del formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -152,7 +149,7 @@ function WorkDetails() {
               <p>Habilidades: {work.skills.length > 0 ? work.skills.join(', ') : 'Ninguna'}</p>
               <p>Profesional: {work.professional.username}</p>
 
-              {/* Solo mostrar los botones si el loggedUser es el creador */}
+              
               {loggedUserId === work.professional._id && (
                 <div>
                   <button onClick={() => setIsEditing(true)}>Editar</button>
