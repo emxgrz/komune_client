@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router";
 import Private from "./components/auth/Private";
 
-import Navbar from "./components/Navbar"
+import NavbarNew from "./components/Navbar"
 
 
 import EnterPage from "./pages/EnterPage";
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div>
-      <Navbar />
+      <NavbarNew />
 
       <br />
       <hr />

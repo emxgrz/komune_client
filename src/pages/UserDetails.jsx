@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import service from '../services/config.js';
 import { AuthContext } from "../context/auth.context.jsx"
+import { Container, Card, ListGroup, Spinner } from 'react-bootstrap';
+
 
 function UserDetails() {
   const [user, setUser] = useState(null); 
@@ -48,17 +50,20 @@ function UserDetails() {
   }
 
   return (
-    <div>
+    <Container className="mt-5">
       {user && (
-        <div>
-          <p>Email: {email}</p> 
-          <p>Username: {username}</p> 
-          {/* <p>Services: {work}</p>  */}
-
-        </div>
-    )} 
-    </div>
-  )
+        <Card>
+          <Card.Header as="h5">Detalles del Usuario</Card.Header>
+          <ListGroup variant="flush">
+            <ListGroup.Item><strong>Email:</strong> {email}</ListGroup.Item>
+            <ListGroup.Item><strong>Username:</strong> {username}</ListGroup.Item>
+            {/* Puedes descomentar la siguiente línea si decides usar "work" */}
+            {/* <ListGroup.Item><strong>Services:</strong> {work}</ListGroup.Item> */}
+          </ListGroup>
+        </Card>
+      )}
+    </Container>
+  );
 }
 
 export default UserDetails
