@@ -10,9 +10,11 @@ function TransactionList() {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await service.get("/transactions"); 
-        console.log(transactions)
+        const response = await service.get("/transaction"); 
         setTransactions(response.data);
+        console.log(response.data)
+        console.log(transactions)
+
       } catch (error) {
         setError("Error al cargar las transacciones");
       } finally {
@@ -39,13 +41,13 @@ function TransactionList() {
       ) : (
         transactions.map((transaction) => (
           <TransactionCard
-            key={transaction._id}
-            id={transaction._id}
-            work={transaction.work}
-            professional={transaction.professional.username} 
-            client={transaction.client.username} 
-            status={transaction.status}
-          />
+          key={transaction._id}
+          id={transaction._id}
+          work={transaction.work ? transaction.work.description : "Descripción no disponible"} 
+          professional={transaction.professional ? transaction.professional.username : "Profesional no disponible"} 
+          client={transaction.client ? transaction.client.username : "Cliente no disponible"} 
+          status={transaction.status}
+        />
         ))
       )}
     </div>

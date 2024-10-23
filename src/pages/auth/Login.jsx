@@ -2,6 +2,8 @@ import service from "../../services/config.js";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context.jsx"
+import { Container, Form, Button, Alert } from "react-bootstrap";
+
 
 function Login() {
 
@@ -47,38 +49,39 @@ function Login() {
   };
 
   return (
-    <div>
+    <Container className="mt-5">
+      <h1 className="mb-4 text-center">Formulario de Acceso</h1>
 
-      <h1>Formulario de Acceso</h1>
+      <Form onSubmit={handleLogin}>
+        <Form.Group controlId="formEmail">
+          <Form.Label>Correo Electrónico:</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Ingresa tu correo electrónico"
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
+        </Form.Group>
 
-      <form onSubmit={handleLogin}>
-        <label>Correo Electronico:</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
+        <Form.Group controlId="formPassword" className="mt-3">
+          <Form.Label>Contraseña:</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Ingresa tu contraseña"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+        </Form.Group>
 
-        <br />
+        <Button variant="primary" type="submit" className="mt-4">
+          Acceder
+        </Button>
 
-        <label>Contraseña:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-
-        <br />
-
-        <button type="submit">Acceder</button>
-
-        {errorMessage && <p>{errorMessage}</p>}
-
-      </form>
-      
-    </div>
+        {errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert>}
+      </Form>
+    </Container>
   );
 }
 

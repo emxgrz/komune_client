@@ -8,13 +8,11 @@ function WorkCard({ id, title, description, professional }) {
   return (
     <div style={{ cursor: 'pointer', border: '1px solid #ccc', padding: '10px', margin: '10px' }}>
       <Link to={`/work/${id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-        <p>{professional}</p> 
-        <p>{title}</p>
-        <p>{description}</p>
-      </Link>
-      <Link to="/transaction-form">
-        <button>Interested? Click here!</button> {/* para crear una nueva transacción si están interesados en el anuncio del servicio */}
-      </Link>
+  <p>{professional || "Profesional no disponible"}</p>
+  <p>{title || "Título no disponible"}</p> 
+  <p>{description || "Descripción no disponible"}</p>
+</Link>
+      
     </div>
   );
 }

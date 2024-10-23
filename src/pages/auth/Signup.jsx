@@ -1,6 +1,8 @@
 import service from "../../services/config";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Container, Form, Button, Alert } from "react-bootstrap";
+
 
 function Signup() {
 
@@ -41,52 +43,50 @@ function Signup() {
   };
 
   return (
-    <div>
+    <Container className="mt-5">
+      <h1 className="mb-4">Formulario de Registro</h1>
 
-      <h1>Formulario de Registro</h1>
-    
-      <form onSubmit={handleSignup}>
+      <Form onSubmit={handleSignup}>
+        <Form.Group controlId="formEmail">
+          <Form.Label>Correo Electrónico:</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Ingresa tu correo electrónico"
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
+        </Form.Group>
 
-        <label>Correo Electronico:</label>
-        <input
-       
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
+        <Form.Group controlId="formUsername" className="mt-3">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Ingresa tu nombre de usuario"
+            value={username}
+            onChange={handleUsernameChange}
+            required
+          />
+        </Form.Group>
 
-        <br />
+        <Form.Group controlId="formPassword" className="mt-3">
+          <Form.Label>Contraseña:</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Ingresa tu contraseña"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+        </Form.Group>
 
-        <label>Username:</label>
-        <input
-        
-          type="text"
-          name="username"
-          value={username}
-          onChange={handleUsernameChange}
-        />
+        <Button variant="primary" type="submit" className="mt-4">
+          Registrar
+        </Button>
 
-        <br />
-
-        <label>Contraseña:</label>
-        <input
-       
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-
-        <br />
-
-        <button type="submit">Registrar</button>
-
-        {errorMessage && <p>{errorMessage}</p>}
-
-      </form>
-      
-    </div>
+        {errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert>}
+      </Form>
+    </Container>
   );
 }
 

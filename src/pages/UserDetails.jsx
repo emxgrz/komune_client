@@ -1,52 +1,44 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import service from '../services/config.js';
-import { AuthContext } from "../context/auth.context.jsx"
-import { Container, Card, ListGroup, Spinner } from 'react-bootstrap';
-
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import service from "../services/config.js";
+import { AuthContext } from "../context/auth.context.jsx";
+import { Container, Card, ListGroup, Spinner } from "react-bootstrap";
 
 function UserDetails() {
-  const [user, setUser] = useState(null); 
-  const [email, setEmail] = useState(null); 
-  const [username, setUsername] = useState(null); 
-  const [work, setWork] = useState(null)
-  const [error, setError] = useState(null); 
-  const [loading, setLoading] = useState(true); 
-  const { isLoggedIn, loggedUserId , authenticateUser } = useContext(AuthContext)
+  const [user, setUser] = useState(null);
+ 
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { isLoggedIn, loggedUserId, authenticateUser } =
+    useContext(AuthContext);
 
-  const {userId} = useParams()
+  const { userId } = useParams();
 
-  const isOwner = loggedUserId === userId
-
-
-// hacer un handle edit para poder actualizar la info. Luego usar la ruta PUT que ya tengo. El modelo ya está actualizado.
+  const isOwner = loggedUserId === userId;
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const response = await service.get(`/user/${userId}`);
-        console.log(response.data)
-        setUser(response.data._id)
-        setEmail(response.data.email)
-        setUsername(response.data.username)
-        // setWork(response.data.work[0].title)
-      } catch (error) {
-        setError('Usuario no encontrado o error en la carga');
-        console.error(error); 
+        console.log(response.data);
+        setUser(response.data);
+              } catch (error) {
+        setError("Usuario no encontrado o error en la carga");
+        console.error(error);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
-    fetchUser(); 
-  }, [userId]); 
+    fetchUser();
+  }, [userId]);
 
   if (loading) {
     return <p>Cargando...</p>;
   }
 
   if (error) {
-    return <p>{error}</p>; 
+    return <p>{error}</p>;
   }
 
   return (
@@ -55,10 +47,57 @@ function UserDetails() {
         <Card>
           <Card.Header as="h5">Detalles del Usuario</Card.Header>
           <ListGroup variant="flush">
-            <ListGroup.Item><strong>Email:</strong> {email}</ListGroup.Item>
-            <ListGroup.Item><strong>Username:</strong> {username}</ListGroup.Item>
-            {/* Puedes descomentar la siguiente línea si decides usar "work" */}
-            {/* <ListGroup.Item><strong>Services:</strong> {work}</ListGroup.Item> */}
+          {user.image && (
+              <ListGroup.Item>
+                <img 
+                  src={user.image} 
+                  alt={`${user.username}'s avatar`} 
+                  style={{ width: '100px', height: '100px', borderRadius: '50%', marginLeft: '10px' }} 
+                />
+              </ListGroup.Item>
+            )}
+            {user.email && (
+              <ListGroup.Item>
+                <strong>Email:</strong> {user.email}
+              </ListGroup.Item>
+            )}
+            {user.username && (
+              <ListGroup.Item>
+                <strong>Username:</strong> {user.username}
+              </ListGroup.Item>
+            )}
+            {user.firstName && (
+              <ListGroup.Item>
+                <strong>Nombre:</strong> {user.firstName}
+              </ListGroup.Item>
+            )}
+            {user.lastName && (
+              <ListGroup.Item>
+                <strong>Apellido:</strong> {user.lastName}
+              </ListGroup.Item>
+            )}
+            {user.dateOfBirth && (
+              <ListGroup.Item>
+                <strong>Fecha de Nacimiento:</strong>{" "}
+                {new Date(user.dateOfBirth).toLocaleDateString()}
+              </ListGroup.Item>
+            )}
+            {user.location && user.location.city && (
+              <ListGroup.Item>
+                <strong>Ciudad:</strong> {user.location.city}
+              </ListGroup.Item>
+            )}
+            {user.location && user.location.country && (
+              <ListGroup.Item>
+                <strong>País:</strong> {user.location.country}
+              </ListGroup.Item>
+            )}
+            {user.description && (
+              <ListGroup.Item>
+                <strong>Descripción:</strong> {user.description}
+              </ListGroup.Item>
+            )}
+            
           </ListGroup>
         </Card>
       )}
@@ -66,4 +105,4 @@ function UserDetails() {
   );
 }
 
-export default UserDetails
+export default UserDetails;

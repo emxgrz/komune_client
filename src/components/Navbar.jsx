@@ -32,10 +32,10 @@ function NavbarNew() {
   return (
     <Navbar bg="light" expand="lg" className="shadow-sm">
       <Container>
-        <Navbar.Brand as={Link} to="/">LOGO</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+          {!isLoggedIn && <Nav.Link as={Link} to="/">LOGO</Nav.Link>}
             {!isLoggedIn && <Nav.Link as={Link} to="/our-mission">Our mission</Nav.Link>}
             {!isLoggedIn && <Nav.Link as={Link} to="/signup">Registro</Nav.Link>}
             {!isLoggedIn && <Nav.Link as={Link} to="/login">Acceso</Nav.Link>}

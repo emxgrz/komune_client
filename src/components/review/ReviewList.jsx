@@ -37,14 +37,14 @@ function ReviewList() {
       {reviews.length > 0 ? (
         reviews.map((review) => (
           <ReviewCard
-            key={review._id} 
-            id={review._id}
-            reviewer={review.reviewer.username}
-            reviewed={review.reviewed.username}
-            transaction={review.transaction.description} 
-            rating={review.rating}
-            comment={review.comment}
-          />
+  key={review._id}
+  id={review._id}
+  reviewer={review.reviewer ? review.reviewer.username : "Reviewwer no disponible"} 
+  reviewed={review.reviewed ? review.reviewed.username : "Reviewed no disponible"}
+  transaction={review.transaction ? review.transaction.description : "Transacción no disponible"} 
+  rating={review.rating} 
+  comment={review.comment || "Comentario no disponible"} 
+/>
         ))
       ) : (
         <p>No hay reseñas disponibles</p>

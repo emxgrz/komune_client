@@ -11,7 +11,7 @@ function TransactionDetails() {
   useEffect(() => {
     const fetchTransaction = async () => {
       try {
-        const response = await service.get(`/transactions/${id}`); 
+        const response = await service.get(`/transaction/${id}`); 
         console.log(response.data);
         setTransaction(response.data);
       } catch (error) {

@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import service from '../services/config.js'
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import service from "../services/config.js";
 import { AuthContext } from "../context/auth.context.jsx";
-import { useContext } from 'react';
-
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 function WorkDetails() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  const { isLoggedIn, loggedUserId , authenticateUser } = useContext(AuthContext)
-  const [work, setWork] = useState(null); 
+  const { isLoggedIn, loggedUserId, authenticateUser } =
+    useContext(AuthContext);
+  const [work, setWork] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isEditing, setIsEditing] = useState(false); 
+  const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     skills: [],
-  }); 
+  });
 
   useEffect(() => {
     const fetchWork = async () => {
@@ -28,10 +29,10 @@ function WorkDetails() {
         setFormData({
           title: response.data.title,
           description: response.data.description,
-          skills: response.data.skills || [], 
+          skills: response.data.skills || [],
         });
       } catch (error) {
-        setError('Error al cargar los detalles del trabajo');
+        setError("Error al cargar los detalles del trabajo");
       } finally {
         setLoading(false);
       }
@@ -41,37 +42,39 @@ function WorkDetails() {
   }, [id]);
 
   const handleEdit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     if (loggedUserId === work.professional._id) {
       try {
-        const response = await service.put(`/work/${id}`, formData); 
-        setWork(response.data); 
-        setIsEditing(false); 
-        alert('Trabajo actualizado con éxito');
+        const response = await service.put(`/work/${id}`, formData);
+        setWork(response.data);
+        setIsEditing(false);
+        alert("Trabajo actualizado con éxito");
       } catch (error) {
-        console.error('Error al editar el trabajo:', error);
-        alert('Hubo un error al actualizar el trabajo.');
+        console.error("Error al editar el trabajo:", error);
+        alert("Hubo un error al actualizar el trabajo.");
       }
     } else {
-      alert('No tienes permiso para editar este trabajo.');
+      alert("No tienes permiso para editar este trabajo.");
     }
   };
 
   const handleDelete = async () => {
     if (loggedUserId === work.professional._id) {
-      const confirmDelete = window.confirm('¿Estás seguro de que deseas eliminar este trabajo?');
+      const confirmDelete = window.confirm(
+        "¿Estás seguro de que deseas eliminar este trabajo?"
+      );
       if (confirmDelete) {
         try {
-          await service.delete(`/work/${id}`); 
-          alert('Trabajo eliminado con éxito');
-          navigate('/works'); 
+          await service.delete(`/work/${id}`);
+          alert("Trabajo eliminado con éxito");
+          navigate("/works");
         } catch (error) {
-          console.error('Error al eliminar el trabajo:', error);
-          alert('Hubo un error al eliminar el trabajo.');
+          console.error("Error al eliminar el trabajo:", error);
+          alert("Hubo un error al eliminar el trabajo.");
         }
       }
     } else {
-      alert('No tienes permiso para eliminar este trabajo.');
+      alert("No tienes permiso para eliminar este trabajo.");
     }
   };
 
@@ -122,16 +125,20 @@ function WorkDetails() {
               </div>
 
               <div>
-                <label htmlFor="skills">Habilidades (separadas por comas):</label>
+                <label htmlFor="skills">
+                  Habilidades (separadas por comas):
+                </label>
                 <input
                   type="text"
                   id="skills"
                   name="skills"
-                  value={formData.skills.join(', ')}
+                  value={formData.skills.join(", ")}
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
-                      skills: e.target.value.split(',').map((skill) => skill.trim()),
+                      skills: e.target.value
+                        .split(",")
+                        .map((skill) => skill.trim()),
                     }))
                   }
                 />
@@ -146,10 +153,16 @@ function WorkDetails() {
             <div>
               <h3>{work.title}</h3>
               <p>{work.description}</p>
-              <p>Habilidades: {work.skills.length > 0 ? work.skills.join(', ') : 'Ninguna'}</p>
+              <p>
+                Habilidades:{" "}
+                {work.skills.length > 0 ? work.skills.join(", ") : "Ninguna"}
+              </p>
               <p>Profesional: {work.professional.username}</p>
+              <Link to="/transaction-form">
+                <button>Interested? Click here!</button>
+                {/* para crear una nueva transacción si están interesados en el anuncio del servicio */}
+              </Link>
 
-              
               {loggedUserId === work.professional._id && (
                 <div>
                   <button onClick={() => setIsEditing(true)}>Editar</button>

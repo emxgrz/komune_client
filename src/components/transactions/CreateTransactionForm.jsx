@@ -19,7 +19,7 @@ function CreateTransactionForm() {
     setError(null);
 
     try {
-      const response = await service.post("/transactions", {
+      const response = await service.post("/transaction", {
         work,
         professional,
         client: loggedUserId, 

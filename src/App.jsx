@@ -11,6 +11,7 @@ import Signup from "./pages/auth/Signup"
 import OurMission from "./pages/OurMission";
 
 import ProfilePage from "./pages/ProfilePage";
+import UpdateProfile from "./pages/UpdateProfile";
 
 import SearchPage from "./pages/SearchPage";
 import HomePage from "./pages/HomePage"
@@ -44,7 +45,9 @@ function App() {
 
         {/* Once inside de web, private */}
         <Route path="/my-page/:userId" element={ <Private> <ProfilePage/> </Private> } />
+        <Route path="/edit-page/:userId" element={ <Private> <UpdateProfile/> </Private> } />
         <Route path="/profiles/:userId" element={<ProfilePage />} />
+
 
         <Route path="/search" element={ <Private> <SearchPage /> </Private> } />
         <Route path="/home" element={ <Private> <HomePage /> </Private> } />
