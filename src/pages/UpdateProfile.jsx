@@ -7,6 +7,9 @@ function UpdateProfile() {
   const { isLoggedIn, loggedUserId } = useContext(AuthContext); 
   const { userId } = useParams(); 
 
+  const [imageUrl, setImageUrl] = useState(null); 
+const [isUploading, setIsUploading] = useState(false);
+
   const [userData, setUserData] = useState({
     username: '',
     email: '',
@@ -42,6 +45,33 @@ function UpdateProfile() {
     return <p>No tienes permiso para editar este perfil.</p>; 
   }
 
+  const handleFileUpload = async (event) => {
+    console.log("The file to be uploaded is: ", event.target.files[0]);
+  
+    if (!event.target.files[0]) {
+      return;
+    }
+  
+    setIsUploading(true);
+  
+    const uploadData = new FormData(); 
+    uploadData.append("image", event.target.files[0]);
+    
+  
+    try {
+      const response = await service.post("/upload/media", uploadData)
+     
+      console.log(response.data)
+  
+      setImageUrl(response.data.imageUrl);
+  
+  
+      setIsUploading(false); 
+    } catch (error) {
+      navigate("/error");
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name.includes('location')) {
@@ -64,13 +94,19 @@ function UpdateProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await service.put(`/user/${userId}`, userData); 
+      const updatedUserData = { 
+        ...userData,
+        image: imageUrl  || userData.image
+       }; 
+      await service.put(`/user/${userId}`, updatedUserData); 
       navigate(`/my-page/${userId}`); 
     } catch (err) {
       console.error(err);
       setError('Error al actualizar el perfil.');
     }
   };
+
+  
 
   return (
     <div>
@@ -153,12 +189,15 @@ function UpdateProfile() {
     <div>
       <label>Imagen:</label>
       <input
-        type="text" 
-        name="image"
-        value={userData.image || ''} 
-        onChange={handleChange}
-      />
+            type="file" // Cambiar a tipo file para cargar imágenes
+            name="image" // Aceptar solo archivos de imagen
+            onChange={handleFileUpload} // Manejar la carga del archivo
+            disabled={isUploading} // Deshabilitar durante la carga
+          />
     </div>
+    {isUploading ? <h3>... uploading image</h3> : null}
+    {imageUrl ? (<div><img src={imageUrl} alt="img" width={200} /></div>) : null}
+
     <button type="submit">Actualizar Perfil</button>
   </form>
 </div>

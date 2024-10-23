@@ -8,7 +8,7 @@ import { Container, Form, Button, Alert } from "react-bootstrap";
 function Login() {
 
   const navigate = useNavigate()
-  const { authenticateUser } = useContext(AuthContext)
+  const { authenticateUser, loggedUserId  } = useContext(AuthContext)
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +36,7 @@ function Login() {
 
       await authenticateUser()
 
-      navigate("/my-page")
+      navigate(`/home`)
 
     } catch (error) {
       console.log(error)

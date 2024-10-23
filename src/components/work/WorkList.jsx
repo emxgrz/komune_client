@@ -41,7 +41,7 @@ function WorkList() {
             id={work._id}
             title={work.title}
             description={work.description || "Descripción no disponible."}
-            professional={work.professional.username} 
+            // professional={work.professional.username} poner bien cuando tenga users
           />
         ))
       )}
