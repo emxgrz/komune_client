@@ -1,16 +1,19 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import service from "../../services/config"; 
 import { AuthContext } from "../../context/auth.context"; 
 
 function CreateTransactionForm() {
-  const [work, setWork] = useState("");
-  const [professional, setProfessional] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const { loggedUserId } = useContext(AuthContext); 
   const navigate = useNavigate();
+
+  const {userId} = useParams()
+  const {workId} = useParams()
 
   const handleSubmit = async (e) => {
     e.preventDefault(); //Para prevenir el comportamiento por defecto del formulario!!
@@ -20,13 +23,15 @@ function CreateTransactionForm() {
 
     try {
       const response = await service.post("/transaction", {
-        work,
-        professional,
+        work: workId,
+        professional: userId,
         client: loggedUserId, 
-        status,
+        title,
+        description,
+        status
       });
 
-      navigate("/my-page");
+      navigate("/my-transactions");
     } catch (error) {
       setError(error.response?.data?.message || "Ocurrió un error");
     } finally {
@@ -39,23 +44,23 @@ function CreateTransactionForm() {
       <h2>Crear Transacción</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label id="work">Trabajo:</label>
+          <label id="title">Título:</label>
           <input
             type="text"
-            id="work"
-            value={work}
-            onChange={(e) => setWork(e.target.value)}
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             required
           />
         </div>
         
         <div>
-          <label id="professional">Profesional:</label>
+          <label id="description">Descripción:</label>
           <input
             type="text"
-            id="professional"
-            value={professional}
-            onChange={(e) => setProfessional(e.target.value)}
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             required
           />
         </div>
@@ -69,7 +74,7 @@ function CreateTransactionForm() {
             required
           >
             <option value="">Seleccione un estado</option>
-            <option value="pendiente">Pendiente</option>
+            <option value="en progreso...">Pendiente</option>
             <option value="completado">Completado</option>
             <option value="cancelado">Cancelado</option>
           </select>

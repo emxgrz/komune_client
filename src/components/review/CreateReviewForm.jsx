@@ -33,7 +33,7 @@ function CreateReviewForm() {
       setRating("");
       setComment("");
 
-      navigate("/my-page");
+      navigate("/my-page/:userId");
 
     } catch (error) {
       setError("Error al crear la reseña. Intenta de nuevo.");

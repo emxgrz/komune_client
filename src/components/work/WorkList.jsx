@@ -10,6 +10,7 @@ function WorkList() {
     const fetchWorks = async () => {
       try {
         const response = await service.get("/work"); 
+        console.log(response.data)
         setWorks(response.data);
       } catch (error) {
         setError("Error al cargar los trabajos");
@@ -41,7 +42,9 @@ function WorkList() {
             id={work._id}
             title={work.title}
             description={work.description || "Descripción no disponible."}
-            // professional={work.professional.username} poner bien cuando tenga users
+            professional={work.professional.username} 
+            image={work.professional.image}
+            professionalId={work.professional._id}
           />
         ))
       )}

@@ -13,7 +13,6 @@ function TransactionList() {
         const response = await service.get("/transaction"); 
         setTransactions(response.data);
         console.log(response.data)
-        console.log(transactions)
 
       } catch (error) {
         setError("Error al cargar las transacciones");
@@ -43,8 +42,8 @@ function TransactionList() {
           <TransactionCard
           key={transaction._id}
           id={transaction._id}
-          work={transaction.work ? transaction.work.description : "Descripción no disponible"} 
-          professional={transaction.professional ? transaction.professional.username : "Profesional no disponible"} 
+          title={transaction ? transaction.title : "Título no disponible"} 
+          description={transaction ? transaction.description : "Profesional no disponible"} 
           client={transaction.client ? transaction.client.username : "Cliente no disponible"} 
           status={transaction.status}
         />

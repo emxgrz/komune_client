@@ -158,7 +158,7 @@ function WorkDetails() {
                 {work.skills.length > 0 ? work.skills.join(", ") : "Ninguna"}
               </p>
               <p>Profesional: {work.professional.username}</p>
-              <Link to="/transaction-form">
+              <Link to={`/transaction-form/${work.professional._id}/${work._id}`}>
                 <button>Interested? Click here!</button>
                 {/* para crear una nueva transacción si están interesados en el anuncio del servicio */}
               </Link>

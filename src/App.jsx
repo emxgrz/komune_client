@@ -60,7 +60,7 @@ function App() {
 
         <Route path="/my-transactions" element={<Private> <TransactionPage /> </Private>} />
         <Route path="/transaction/:id" element={<Private> <TransactionDetails /> </Private>} />
-        <Route path="/transaction-form" element={<Private> <CreateTransactionForm /> </Private>} />
+        <Route path="/transaction-form/:userId/:workId" element={<Private> <CreateTransactionForm /> </Private>} />
 
 
       </Routes>
