@@ -4,6 +4,9 @@ import service from "../services/config.js";
 import { AuthContext } from "../context/auth.context.jsx";
 import { Container, Card, ListGroup, Spinner } from "react-bootstrap";
 import "../styles/userDetails.css"
+import SyncLoader from "react-spinners/SyncLoader";
+
+
 
 function UserDetails() {
   const [user, setUser] = useState(null);
@@ -35,7 +38,11 @@ function UserDetails() {
   }, [userId]);
 
   if (loading) {
-    return <p>Cargando...</p>;
+    return (
+      <Container className="text-center mt-5">
+        <SyncLoader color="#343a40" loading={loading} size={15} />
+      </Container>
+    );
   }
 
   if (error) {

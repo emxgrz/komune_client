@@ -2,9 +2,8 @@ import { useState, useContext } from "react";
 import service from "../../services/config"; 
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context"; 
-import { Container, Form, Button } from 'react-bootstrap';
-import "../../styles/reviewFormStyle.css"
-
+import { Container, Form, Button, Alert } from 'react-bootstrap';
+import SyncLoader from "react-spinners/SyncLoader"; import "../../styles/reviewFormStyle.css";
 
 function CreateReviewForm() {
   const { loggedUserId } = useContext(AuthContext); 
@@ -13,10 +12,11 @@ function CreateReviewForm() {
   const [rating, setRating] = useState("");
   const [comment, setComment] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);   
   const navigate = useNavigate();
 
-  const {transactionId} = useParams()
-  const {userId} = useParams()
+  const { transactionId } = useParams();
+  const { userId } = useParams();
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
@@ -24,16 +24,17 @@ function CreateReviewForm() {
       setError("Los campos transacción, revisor (automáticamente) y calificación son requeridos.");
       return;
     }
-  
-    console.log("Datos a enviar:", {
-      transaction: transactionId,
-      reviewer: loggedUserId,
-      reviewed: userId,
-      rating,
-      comment,
-    });
-    
+
     try {
+      setLoading(true);       
+      console.log("Datos a enviar:", {
+        transaction: transactionId,
+        reviewer: loggedUserId,
+        reviewed: userId,
+        rating,
+        comment,
+      });
+
       const response = await service.post("/review", {
         transaction: transactionId,
         reviewer: loggedUserId, 
@@ -41,23 +42,25 @@ function CreateReviewForm() {
         rating,
         comment,
       });
-  
-      console.log("Respuesta del servidor:", response.data); // Log para verificar la respuesta
-  
+
+      console.log("Respuesta del servidor:", response.data);
       setRating("");
       setComment("");
       navigate(`/my-page/${loggedUserId}`); 
-  
+
     } catch (error) {
       setError("Error al crear la reseña. Intenta de nuevo.");
       console.error(error.response ? error.response.data : error.message);
+    } finally {
+      setLoading(false); 
     }
   };
-  
 
   return (
     <Container className="mt-5">
       <h2 className="text-center mb-4">🌟 Crear Reseña 🌟</h2>
+      {error && <Alert variant="danger">{error}</Alert>} 
+
       <Form onSubmit={handleSubmit} className="create-review-form">
         <Form.Group controlId="formRating">
           <Form.Label>Calificación ⭐</Form.Label>
@@ -69,8 +72,7 @@ function CreateReviewForm() {
             required
             min={1}
             max={5}
-            className="custom-input" // Clase personalizada para el input
-          />
+            className="custom-input"/>
         </Form.Group>
 
         <Form.Group controlId="formComment">
@@ -81,13 +83,16 @@ function CreateReviewForm() {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder="Deja un comentario"
-            className="custom-textarea" // Clase personalizada para el textarea
-          />
+            className="custom-textarea"  />
         </Form.Group>
 
         <div className="text-center">
-          <Button variant="primary" type="submit" className="mt-3">
-            ✍️ Crear Reseña
+          <Button variant="primary" type="submit" className="mt-3" disabled={loading}>
+            {loading ? (
+              <SyncLoader color="#343a40" loading={loading} size={20} />   
+          ) : (
+              "✍️ Crear Reseña"
+            )}
           </Button>
         </div>
       </Form>

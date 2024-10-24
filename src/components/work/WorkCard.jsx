@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card } from "react-bootstrap"; // Importamos Card de react-bootstrap
-import "../../styles/workCardStyle.css"
+import { Card } from "react-bootstrap"; import "../../styles/workCardStyle.css"
 
 function WorkCard({ id, title, description, professional, professionalId, image }) {
   return (

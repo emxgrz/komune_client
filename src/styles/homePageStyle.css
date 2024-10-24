@@ -1,14 +1,6 @@
 .custom-button {
-  width: 100%; /* Cambia el ancho del botón a un porcentaje más pequeño */
-  max-width: 400px; /* Ajusta el ancho máximo según tus necesidades */
-  background-color: white; /* Fondo blanco */
-  border-color: blue; /* Borde azul */
-  color: blue; /* Texto azul (opcional) */
-  margin-bottom: -30px
+  width: 100%;   max-width: 400px;   background-color: white;   border-color: blue;   color: blue;   margin-bottom: -30px
 }
 
-/* Cambiar el color del borde al pasar el mouse */
 .custom-button:hover {
-  background-color: rgb(7, 25, 189); /* Cambiar a un color más claro al pasar el mouse */
-  border-color: darkblue; /* Cambiar el borde a un color más oscuro al pasar el mouse */
-}
+  background-color: rgb(7, 25, 189);   border-color: darkblue; }

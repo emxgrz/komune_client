@@ -3,6 +3,8 @@ import service from "../../services/config";
 import TransactionCard from "./TransactionCard"; 
 import { Container, Row, Col } from 'react-bootstrap';
 import "../../styles/transactionListStyle.css"
+import SyncLoader from "react-spinners/SyncLoader";
+
 
 
 function TransactionList() {
@@ -28,7 +30,11 @@ function TransactionList() {
   }, []);
 
   if (loading) {
-    return <p>Cargando transacciones...</p>;
+    return (
+      <Container className="text-center mt-5">
+        <SyncLoader color="#343a40" loading={loading} size={15} />
+      </Container>
+    );
   }
 
   if (error) {

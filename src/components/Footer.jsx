@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import '../styles/footerStyle.css'; 
 
-const Footer = ({isShortPage}) => {
+const Footer = () => {
   return (
     <footer 
     className="footer bg-dark text-white py-3" 

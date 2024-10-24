@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Container, Card, Button, Form } from 'react-bootstrap';
 import "../styles/workDetailsStyle.css"
+import SyncLoader from "react-spinners/SyncLoader";
 
 
 function WorkDetails() {
@@ -52,6 +53,8 @@ function WorkDetails() {
         setWork(response.data);
         setIsEditing(false);
         alert("Trabajo actualizado con éxito");
+        navigate(`/my-page/${loggedUserId}`);
+
       } catch (error) {
         console.error("Error al editar el trabajo:", error);
         alert("Hubo un error al actualizar el trabajo.");
@@ -70,7 +73,7 @@ function WorkDetails() {
         try {
           await service.delete(`/work/${id}`);
           alert("Trabajo eliminado con éxito");
-          navigate("/works");
+          navigate(`/my-page/${loggedUserId}`);
         } catch (error) {
           console.error("Error al eliminar el trabajo:", error);
           alert("Hubo un error al eliminar el trabajo.");
@@ -90,7 +93,11 @@ function WorkDetails() {
   };
 
   if (loading) {
-    return <p>Cargando detalles del trabajo...</p>;
+    return (
+      <Container className="text-center mt-5">
+        <SyncLoader color="#343a40" loading={loading} size={15} />
+      </Container>
+    );
   }
 
   if (error) {

@@ -27,8 +27,7 @@ export default function EnterPage() {
                 src={image1} 
                 alt="Descripción de la imagen" 
                 className="img-fluid rounded" 
-                style={{ maxHeight: '400px', width: '80%', objectFit: 'cover' }} // Tamaño de la imagen ajustado
-              />
+                style={{ maxHeight: '400px', width: '80%', objectFit: 'cover' }}               />
             </Col>
           </Row>
           <Row className="w-100 mt-4"> {/* Nueva fila para el botón */}

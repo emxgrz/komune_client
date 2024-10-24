@@ -1,18 +1,12 @@
 .transaction-details {
   display: flex;
-  justify-content: space-between; /* Espacio entre etiquetas y valores */
-  margin-bottom: 10px; /* Espaciado entre las líneas */
-}
+  justify-content: space-between;   margin-bottom: 10px; }
 
 .transaction-label {
-  font-weight: bold; /* Hacer que las etiquetas sean más visibles */
-  min-width: 100px; /* Ancho mínimo para las etiquetas */
-  text-align: left; /* Alinear texto a la izquierda */
-}
+  font-weight: bold;   min-width: 100px;   text-align: left; }
 
 .transaction-value {
-  text-align: left; /* Alinear texto a la izquierda */
-}
+  text-align: left; }
 
 .review-card{
   margin-top: -50px;

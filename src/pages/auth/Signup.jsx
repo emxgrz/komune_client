@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, Button, Alert, Card } from "react-bootstrap";
 import "../../styles/signupLogin.css"
+import SyncLoader from "react-spinners/SyncLoader"; 
+
 
 function Signup() {
 
@@ -12,6 +14,8 @@ function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("")
+  const [loading, setLoading] = useState(false); 
+
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handleUsernameChange = (e) => setUsername(e.target.value);
@@ -33,12 +37,14 @@ function Signup() {
       navigate("/login")
 
     } catch (error) {
-      console.log(error)
-      if (error.response === 400) {
-        setErrorMessage(error.response.data.message)
+      console.log(error);
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data.message);
       } else {
-        console.log("esto debería ser una pg de error")
+        console.log("esto debería ser una pg de error");
       }
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -56,8 +62,7 @@ function Signup() {
               value={email}
               onChange={handleEmailChange}
               required
-              size="lg" // Tamaño de campo más compacto
-            />
+              size="lg"             />
           </Form.Group>
 
           <Form.Group controlId="formUsername" className="mt-3">
@@ -68,8 +73,7 @@ function Signup() {
               value={username}
               onChange={handleUsernameChange}
               required
-              size="lg" // Tamaño de campo más compacto
-            />
+              size="lg"             />
           </Form.Group>
 
           <Form.Group controlId="formPassword" className="mt-3">
@@ -80,12 +84,16 @@ function Signup() {
               value={password}
               onChange={handlePasswordChange}
               required
-              size="lg" // Tamaño de campo más compacto
-            />
+              size="lg"             />
           </Form.Group>
 
-          <Button variant="primary" type="submit" className="mt-4 w-100" style={{ transition: 'background-color 0.3s' }}>
-            ¡Comencemos!
+          <Button 
+            variant="primary" 
+            type="submit" 
+            className="mt-4 w-100" 
+            style={{ transition: 'background-color 0.3s' }}
+            disabled={loading}           >
+            {loading ? <SyncLoader color="#343a40" loading={loading} size={10} /> : "¡Comencemos!"}
           </Button>
 
           {errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert>}

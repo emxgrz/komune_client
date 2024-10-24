@@ -4,6 +4,8 @@ import service from '../services/config';
 import { AuthContext } from '../context/auth.context';
 import { Form, Button, Container, Card, Alert, Row, Col } from 'react-bootstrap';
 import "../styles/updateProfileStyle.css"
+import SyncLoader from "react-spinners/SyncLoader";
+
 
 
 function UpdateProfile() {
@@ -11,7 +13,8 @@ function UpdateProfile() {
   const { userId } = useParams(); 
 
   const [imageUrl, setImageUrl] = useState(null); 
-const [isUploading, setIsUploading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [loading, setLoading] = useState(true)
 
   const [userData, setUserData] = useState({
     username: '',
@@ -29,8 +32,7 @@ const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  //primero cargamos los datos del user para ver los existentes, luego los editamos
-  useEffect(() => {
+    useEffect(() => {
     const fetchUserData = async () => {
       try {
         const response = await service.get(`/user/${userId}`); 
@@ -38,6 +40,8 @@ const [isUploading, setIsUploading] = useState(false);
       } catch (err) {
         console.error(err);
         setError('Error al cargar los datos del usuario.');
+      } finally {
+        setLoading(false); 
       }
     };
 
@@ -113,13 +117,17 @@ const [isUploading, setIsUploading] = useState(false);
 
   return (
 
-  <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}> 
-      <Container className="mt-5  flex-grow-1" >
-        <Card className="shadow-lg">
-          <Card.Header as="h5" className="text-center bg-primary text-white">👤 Actualizar Perfil</Card.Header>
-          <Card.Body>
-            {error && <Alert variant="danger">{error}</Alert>}
-  
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}> 
+    <Container className="mt-5 flex-grow-1">
+      <Card className="shadow-lg">
+        <Card.Header as="h5" className="text-center bg-primary text-white">👤 Actualizar Perfil</Card.Header>
+        <Card.Body>
+          {error && <Alert variant="danger">{error}</Alert>}
+          {loading ? (             <div className="text-center">
+              <SyncLoader color="#343a40" loading={loading} size={15} />
+              <p>Cargando datos del usuario...</p>
+            </div>
+          ) : (
             <Form onSubmit={handleSubmit}>
               <Row className="mb-3">
                 <Col md={6}>
@@ -132,11 +140,11 @@ const [isUploading, setIsUploading] = useState(false);
                       onChange={handleChange}
                       placeholder="Ingrese su nombre de usuario"
                       required
-                      className="custom-input" // Clase personalizada para el input
+                      className="custom-input"
                     />
                   </Form.Group>
                 </Col>
-  
+
                 <Col md={6}>
                   <Form.Group controlId="formEmail">
                     <Form.Label>Email</Form.Label>
@@ -152,7 +160,7 @@ const [isUploading, setIsUploading] = useState(false);
                   </Form.Group>
                 </Col>
               </Row>
-  
+
               <Row className="mb-3">
                 <Col md={6}>
                   <Form.Group controlId="formFirstName">
@@ -167,7 +175,7 @@ const [isUploading, setIsUploading] = useState(false);
                     />
                   </Form.Group>
                 </Col>
-  
+
                 <Col md={6}>
                   <Form.Group controlId="formLastName">
                     <Form.Label>Apellido</Form.Label>
@@ -182,7 +190,7 @@ const [isUploading, setIsUploading] = useState(false);
                   </Form.Group>
                 </Col>
               </Row>
-  
+
               <Row className="mb-3">
                 <Col md={6}>
                   <Form.Group controlId="formDateOfBirth">
@@ -196,7 +204,7 @@ const [isUploading, setIsUploading] = useState(false);
                     />
                   </Form.Group>
                 </Col>
-  
+
                 <Col md={6}>
                   <Form.Group controlId="formCity">
                     <Form.Label>Ciudad</Form.Label>
@@ -211,7 +219,7 @@ const [isUploading, setIsUploading] = useState(false);
                   </Form.Group>
                 </Col>
               </Row>
-  
+
               <Row className="mb-3">
                 <Col md={6}>
                   <Form.Group controlId="formCountry">
@@ -226,7 +234,7 @@ const [isUploading, setIsUploading] = useState(false);
                     />
                   </Form.Group>
                 </Col>
-  
+
                 <Col md={6}>
                   <Form.Group controlId="formDescription">
                     <Form.Label>Descripción</Form.Label>
@@ -242,7 +250,7 @@ const [isUploading, setIsUploading] = useState(false);
                   </Form.Group>
                 </Col>
               </Row>
-  
+
               <Row className="mb-3">
                 <Col md={6}>
                   <Form.Group controlId="formImage">
@@ -257,24 +265,25 @@ const [isUploading, setIsUploading] = useState(false);
                   </Form.Group>
                 </Col>
               </Row>
-  
+
               {isUploading && <Alert variant="info">... Subiendo imagen</Alert>}
               {imageUrl && (
                 <div className="mb-3 text-center">
                   <img src={imageUrl} alt="Imagen de perfil" width={150} />
                 </div>
               )}
-  
+
               <div className="text-center">
                 <Button variant="primary" type="submit" className="mt-3">
                   💼 Actualizar Perfil
                 </Button>
               </div>
             </Form>
-          </Card.Body>
-        </Card>
-      </Container>
-      </div>
+          )}
+        </Card.Body>
+      </Card>
+    </Container>
+  </div>
   );
 }
 

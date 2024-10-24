@@ -3,6 +3,10 @@ import service from "../../services/config";
 import ReviewCard from "./ReviewCard"; 
 import "../../styles/reviewListStyle.css"
 import { useParams } from "react-router-dom";
+import SyncLoader from "react-spinners/SyncLoader";
+import { Container } from 'react-bootstrap';
+
+
 
 function ReviewList() {
   const [reviews, setReviews] = useState([]);
@@ -17,8 +21,7 @@ function ReviewList() {
       try {
         const response = await service.get("/review"); 
         console.log(response)
-        // Filtrar reseñas para que solo muestre las donde el usuario del perfil es el "reviewed"
-        const filteredReviews = response.data.filter(review => 
+                const filteredReviews = response.data.filter(review => 
           review.reviewed && review.reviewed._id === userId
         );
         setReviews(filteredReviews);
@@ -31,12 +34,13 @@ function ReviewList() {
     };
 
     if (userId) {
-      fetchReviews(); // Solo hace la llamada cuando se obtiene el userId
-    }
-  }, [userId]); // El efecto se vuelve a ejecutar si el userId cambia (por si navegas a otro perfil)
-
-  if (loading) {
-    return <p>Cargando reseñas...</p>;
+      fetchReviews();     }
+  }, [userId]);   if (loading) {
+    return (
+      <Container className="text-center mt-5">
+        <SyncLoader color="#343a40" loading={loading} size={15} />
+      </Container>
+    );
   }
 
   if (error) {

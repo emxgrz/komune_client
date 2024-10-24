@@ -1,65 +1,39 @@
 .navbar {
-  background-color: #f8f9fa; /* Fondo claro para la navbar */
-}
+  background-color: #f8f9fa; }
 
 .nav-link {
-  color: #007bff; /* Color de los enlaces */
-  font-weight: bold ;
-  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
-  border: 2px solid rgb(74, 32, 172); /* Borde transparente por defecto */
-  border-radius: 5px; /* Bordes redondeados */
-  padding: 8px 12px; /* Espaciado interno para el botón */
-  margin-right: 3px;
+  color: #007bff;   font-weight: bold ;
+  transition: background-color 0.3s, color 0.3s;   border: 2px solid rgb(74, 32, 172);   border-radius: 5px;   padding: 8px 12px;   margin-right: 3px;
 }
 
 .nav-link:hover {
-  background-color: #0056b3; /* Color de fondo al pasar el ratón */
-  color: white; /* Color del texto al pasar el ratón */
-}
+  background-color: #0056b3;   color: white; }
 
 .navbar-brand {
-  font-size: 1.5rem; /* Tamaño de fuente del logo */
-  color: #007bff;
+  font-size: 1.5rem;   color: #007bff;
 }
 
 .navbar-brand:hover {
-  color: #0056b3; /* Color del logo al pasar el ratón */
-}
+  color: #0056b3; }
 
 .card-container {
-  background-color: white; /* Fondo blanco para la card */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
-  padding: 20px; /* Espaciado interno */
-  max-width: 1000px; /* Ancho máximo para la card */
-  width: 100%; /* Aseguramos que use el 100% hasta el ancho máximo */
-  margin: 20px; /* Margen externo */
-}
+  background-color: white;   border-radius: 10px;   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);   padding: 20px;   max-width: 1000px;   width: 100%;   margin: 20px; }
 
 body {
   background-color: #f4f4f4; 
-  min-height: 100vh; /* El contenedor principal ocupa al menos toda la altura de la ventana */
-
+  min-height: 100vh; 
 }
 
-/* App.css */
 html, body {
-  height: 100%; /* Asegúrate de que el HTML y el cuerpo ocupen el 100% de la altura */
-  margin: 0; /* Elimina márgenes por defecto */
-}
+  height: 100%;   margin: 0; }
 
 #root {
   display: flex;
-  flex-direction: column; /* Coloca los elementos en columna */
-  min-height: 100vh; /* Hace que el contenedor principal ocupe al menos la altura de la ventana */
-}
+  flex-direction: column;   min-height: 100vh; }
 
 .main-content {
-  flex: 1; /* Permite que el contenido principal ocupe el espacio disponible */
-}
+  flex: 1; }
 
 .footer {
-  background-color: #343a40; /* Color de fondo */
-  color: white;
-  padding: 1rem 0; /* Ajusta el padding según tus necesidades */
-}
+  background-color: #343a40;   color: white;
+  padding: 1rem 0; }

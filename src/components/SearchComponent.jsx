@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import WorkCard from "./work/WorkCard";
 import service from "../services/config";
 import { Container, Form, Button, Alert } from 'react-bootstrap';
+import SyncLoader from "react-spinners/SyncLoader";
+
 
 import "../styles/searchBarStyle.css"
 
@@ -33,8 +35,7 @@ function WorkSearch() {
             console.log(works)
           } catch (error) {
             console.error("Error fetching works:", error);
-            navigate(`*`); // Redirigir a una página de error si algo sale mal
-          } finally {
+            navigate(`*`);           } finally {
             setLoading(false); 
           }
         };
@@ -67,10 +68,8 @@ function WorkSearch() {
             onChange={(e) => setSearchedWork(e.target.value)}
             style={{
               padding: "10px",
-              margin: "0 auto", // Centramos la barra
-              width: "50%",
-              border: "2px solid #007bff", // Color de borde azul
-              borderRadius: "5px",
+              margin: "0 auto",               width: "50%",
+              border: "2px solid #007bff",               borderRadius: "5px",
             }}
           />
         </Form.Group>
@@ -80,10 +79,8 @@ function WorkSearch() {
           padding: "15px",
           margin: "0 auto",
           width: "50%",
-          border: "2px solid #007bff", // Recuadro azul
-          borderRadius: "5px",
-          backgroundColor: "#f8f9fa", // Fondo gris claro
-          marginBottom: "30px",
+          border: "2px solid #007bff",           borderRadius: "5px",
+          backgroundColor: "#f8f9fa",           marginBottom: "30px",
         }}
       >
         <Alert variant="warning">Escribe el nombre del servicio que estás buscando (mínimo 3 letras).</Alert>
@@ -91,7 +88,9 @@ function WorkSearch() {
 
       {loading ? (
         <div>
-          <p>Cargando...</p>
+      <Container className="text-center mt-5">
+        <SyncLoader color="#343a40" loading={loading} size={15} />
+      </Container>
         </div>
       ) : (
         <div className="row">
@@ -115,8 +114,7 @@ function WorkSearch() {
                 <p>¿Seguro que estás buscando un servicio correcto?</p>
                 <Button
                   id="create-button"
-                  onClick={() => navigate("/miPgDeCrearWorks")} // Redirigir a la pg de crear usuario
-                  variant="primary"
+                  onClick={() => navigate("/miPgDeCrearWorks")}                   variant="primary"
                 >
                   Crear Servicio
                 </Button>

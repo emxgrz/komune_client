@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useParams } from "react";
 import service from "../../services/config"; 
 import WorkCard from "./WorkCard"; 
-import { Card } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 import "../../styles/workListStyle.css"
+import SyncLoader from "react-spinners/SyncLoader";
+
 
 function WorkList({userId}) {
   const [works, setWorks] = useState([]);
@@ -15,16 +17,14 @@ function WorkList({userId}) {
       try {
         let response;
         if (userId) {
-          // Si userId existe, hacemos la petición filtrada
           response = await service.get(`/work/user/${userId}`);
         } else {
-          // Si no, obtenemos todos los trabajos
           response = await service.get("/work");
         }
         console.log(response.data);
         setWorks(response.data);
       } catch (error) {
-        setError("Error al cargar los trabajos");
+        console.log(error)
       } finally {
         setLoading(false);
       }
@@ -34,7 +34,11 @@ function WorkList({userId}) {
   }, [userId])
 
   if (loading) {
-    return <p>Cargando trabajos...</p>;
+    return (
+      <Container className="text-center mt-5">
+        <SyncLoader color="#343a40" loading={loading} size={15} />
+      </Container>
+    );
   }
 
   if (error) {

@@ -1,11 +1,2 @@
 .no-reviews-message {
-  font-size: 18px; /* Aumenta el tamaño de la fuente */
-  color: #ff5722; /* Color naranja brillante para resaltar */
-  background-color: #fff3e0; /* Fondo claro para crear contraste */
-  padding: 15px; /* Espaciado interno */
-  border-radius: 8px; /* Bordes redondeados */
-  border: 2px dashed #ff5722; /* Borde punteado */
-  display: inline-block; /* Para que ocupe solo el espacio necesario */
-  font-weight: bold; /* Texto en negrita */
-  text-align: center; /* Centrar el texto */
-}
+  font-size: 18px;   color: #ff5722;   background-color: #fff3e0;   padding: 15px;   border-radius: 8px;   border: 2px dashed #ff5722;   display: inline-block;   font-weight: bold;   text-align: center; }

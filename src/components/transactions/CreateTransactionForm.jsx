@@ -2,7 +2,8 @@ import React, { useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../../services/config"; 
 import { AuthContext } from "../../context/auth.context"; 
-import { Container, Form, Button, Card } from 'react-bootstrap';
+import { Container, Form, Button, Card, Alert } from 'react-bootstrap';
+import SyncLoader from "react-spinners/SyncLoader"; 
 
 
 function CreateTransactionForm() {
@@ -14,30 +15,25 @@ function CreateTransactionForm() {
   const { loggedUserId } = useContext(AuthContext); 
   const navigate = useNavigate();
 
-  const {userId} = useParams()
-  const {workId} = useParams()
+  const { userId } = useParams();
+  const { workId } = useParams();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); //Para prevenir el comportamiento por defecto del formulario!!
-
+    e.preventDefault(); 
     setLoading(true);
     setError(null);
 
-    
-      if (!title.trim()) {
-        setError("El título es obligatorio.");
-        setLoading(false);
-        return;
-      }
-    
-      if (!description.trim()) {
-        setError("La descripción es obligatoria.");
-        setLoading(false);
-        return;
-      }
-    
-    
-      
+    if (!title.trim()) {
+      setError("El título es obligatorio.");
+      setLoading(false);
+      return;
+    }
+
+    if (!description.trim()) {
+      setError("La descripción es obligatoria.");
+      setLoading(false);
+      return;
+    }
 
     try {
       const response = await service.post("/transaction", {
@@ -49,8 +45,6 @@ function CreateTransactionForm() {
         status
       });
 
- 
-
       navigate("/my-transactions");
     } catch (error) {
       setError(error.response?.data?.message || "Ocurrió un error");
@@ -59,13 +53,13 @@ function CreateTransactionForm() {
     }
   };
 
-
-
   return (
     <Container className="mt-5">
       <Card>
         <Card.Header as="h5" className="text-center">Haz tu petición 📩</Card.Header>
         <Card.Body>
+          {error && <Alert variant="danger">{error}</Alert>} 
+
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formTitle" className="mb-3">
               <Form.Label>Título ✒️</Form.Label>
@@ -90,7 +84,7 @@ function CreateTransactionForm() {
               />
             </Form.Group>
 
-            <Form.Group controlId="formStatus" className="mb-3">
+            {/* <Form.Group controlId="formStatus" className="mb-3">
               <Form.Label>Estado 📂</Form.Label>
               <Form.Select
                 value={status}
@@ -100,11 +94,15 @@ function CreateTransactionForm() {
                 <option value="completado">Completado ✅</option>
                 <option value="cancelado">Cancelado ⭕</option>
               </Form.Select>
-            </Form.Group>
+            </Form.Group> */}
 
             <div className="text-center">
-              <Button variant="primary" type="submit">
-                Enviar ▶️
+              <Button variant="primary" type="submit" disabled={loading}>
+                {loading ? (
+                  <SyncLoader color="#343a40" loading={loading} size={20} />
+                ) : (
+                  'Enviar ▶️'
+                )}
               </Button>
             </div>
           </Form>
