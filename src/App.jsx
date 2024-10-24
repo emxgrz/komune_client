@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router";
 import Private from "./components/auth/Private";
+import { useState, useEffect } from "react";
 
 import NavbarNew from "./components/Navbar"
 
@@ -32,39 +33,37 @@ import Footer from "./components/footer";
 function App() {
 
   return (
-    <div>
+    <div id="root"> {/* Asegúrate de que este div tenga el id="root" */}
       <NavbarNew />
 
+      <div className="main-content"> {/* Agregamos la clase para el contenido principal */}
+        <Routes>
+          <Route path="/" element={<EnterPage />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/our-mission" element={<OurMission />} />
 
-      <Routes>
-        <Route path="/" element={<EnterPage />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/our-mission" element={<OurMission />} />
+          {/* Once inside de web, private */}
+          <Route path="/my-page/:userId" element={<Private><ProfilePage /></Private>} />
+          <Route path="/edit-page/:userId" element={<Private><UpdateProfile /></Private>} />
+          <Route path="/profiles/:userId" element={<ProfilePage />} />
 
+          <Route path="/search" element={<Private><SearchPage /></Private>} />
+          <Route path="/home" element={<Private><HomePage /></Private>} />
 
-        {/* Once inside de web, private */}
-        <Route path="/my-page/:userId" element={ <Private> <ProfilePage/> </Private> } />
-        <Route path="/edit-page/:userId" element={ <Private> <UpdateProfile/> </Private> } />
-        <Route path="/profiles/:userId" element={<ProfilePage />} />
+          <Route path="/work/:id" element={<Private><WorkDetails /></Private>} />
+          <Route path="/work-form" element={<Private><CreateWorkForm /></Private>} />
 
+          <Route path="/review/:id" element={<Private><ReviewDetails /></Private>} />
+          <Route path="/review-form/:transactionId/:userId" element={<Private><CreateReviewForm /></Private>} />
 
-        <Route path="/search" element={ <Private> <SearchPage /> </Private> } />
-        <Route path="/home" element={ <Private> <HomePage /> </Private> } />
+          <Route path="/my-transactions" element={<Private><TransactionPage /></Private>} />
+          <Route path="/transaction/:id" element={<Private><TransactionDetails /></Private>} />
+          <Route path="/transaction-form/:userId/:workId" element={<Private><CreateTransactionForm /></Private>} />
+        </Routes>
+      </div>
 
-        <Route path="/work/:id" element={<Private> <WorkDetails /> </Private>} />
-        <Route path="/work-form" element={<Private> <CreateWorkForm /> </Private>} />
-
-        <Route path="/review/:id" element={<Private> <ReviewDetails /> </Private>} />
-        <Route path="/review-form/:transactionId/:userId" element={<Private> <CreateReviewForm /> </Private>} />
-
-        <Route path="/my-transactions" element={<Private> <TransactionPage /> </Private>} />
-        <Route path="/transaction/:id" element={<Private> <TransactionDetails /> </Private>} />
-        <Route path="/transaction-form/:userId/:workId" element={<Private> <CreateTransactionForm /> </Private>} />
-
-
-      </Routes>
-      <Footer/>
+      <Footer />
     </div>
   )
 }

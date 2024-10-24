@@ -1,14 +1,16 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
-import '../styles/footerStyle.css'; // Puedes agregar tus propios estilos
+import '../styles/footerStyle.css'; 
 
-const Footer = () => {
+const Footer = ({isShortPage}) => {
   return (
-    <footer className="footer bg-dark text-white py-3" style={{ position: 'relative', bottom: 0, width: '100%' }}>
+    <footer 
+    className="footer bg-dark text-white py-3" 
+    style={{ position:  'relative' }} 
+  >
       <Container>
         <Row className="d-flex align-items-center justify-content-between">
-          {/* Sección de derechos reservados */}
           <Col className="text-center mb-2 mb-md-0">
             <p className="mb-0">&copy; {new Date().getFullYear()} Komune - Todos los derechos reservados.</p>
           </Col>

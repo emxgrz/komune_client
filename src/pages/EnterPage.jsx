@@ -4,6 +4,8 @@ import image1 from "../assets/images/image1.jpg";
 import "../styles/enterPageStyle.css"
 
 export default function EnterPage() {
+
+  
   return (
     <Container className="editar" fluid style={{ 
       background: 'linear-gradient(to right, #007bff, #6f42c1)', 
@@ -15,7 +17,7 @@ export default function EnterPage() {
         <div className="card-container"> 
           <Row className="w-100">
             <Col md={6} className="text-start">
-              <h1 className="mb-4">Bienvenido</h1>
+              <h1>Bienvenida</h1>
               <p className="lead mb-4">
                 Únete a nuestra comunidad de profesionales y transforma tus habilidades en oportunidades. Crea tu página en nuestra plataforma y ofrece tus servicios a otros, mientras descubres nuevas colaboraciones que enriquecerán tu carrera. Sin tarifas, solo intercambio.
               </p>
