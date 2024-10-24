@@ -28,7 +28,7 @@ import CreateTransactionForm from "./components/transactions/CreateTransactionFo
 import TransactionDetails from "./pages/TransactionDetails";
 
 import WorkList from "./components/work/WorkList";
-import Footer from "./components/footer";
+import Footer from "./components/Footer";
 
 function App() {
 
