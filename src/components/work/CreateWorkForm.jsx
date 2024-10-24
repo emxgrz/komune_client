@@ -25,7 +25,7 @@ function CreateWorkForm() {
       });
       
       console.log('Nuevo trabajo creado:', response.data);
-      navigate('/works'); 
+      navigate('/home'); 
     } catch (error) {
       console.error('Error al crear el trabajo:', error);
     }

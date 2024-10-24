@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import service from "../../services/config"; 
 import TransactionCard from "./TransactionCard"; 
 import { Container, Row, Col } from 'react-bootstrap';
+import "../../styles/transactionListStyle.css"
 
 
 function TransactionList() {
@@ -38,7 +39,9 @@ function TransactionList() {
     <Container className="mt-5">
       {/* <h2 className="text-center mb-4">Lista de Transacciones</h2> */}
       {transactions.length === 0 ? (
-        <p>No hay transacciones disponibles.</p>
+        <p className="no-reviews-message">
+        📭 Todavía no tienes ningún intercambio de servicios.
+      </p>
       ) : (
         <Row>
           {transactions.map((transaction) => (

@@ -1,0 +1,35 @@
+.footer {
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  position: relative; 
+}
+
+
+.footer a {
+  color: #ffffff; /* Color blanco para los enlaces */
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer a:hover {
+  color: #007bff; /* Azul para hover */
+}
+
+.social-icons a {
+  margin-right: 15px;
+}
+
+.social-icons a:hover {
+  color: #007bff;
+}
+
+h5 {
+  font-weight: bold;
+}
+
+.follow-us-text {
+  font-size: 16px; /* Tamaño reducido para el texto */
+  color: #fff; /* Color blanco para el texto */
+  display: inline-flex; /* Íconos y texto en línea */
+  align-items: center; /* Alinear verticalmente íconos y texto */
+}

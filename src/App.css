@@ -40,3 +40,9 @@ body {
   background-color: #f4f4f4; 
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; 
+}
+

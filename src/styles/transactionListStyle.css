@@ -1,18 +1,3 @@
-.review-list {
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.review-list h2 {
-  text-align: center;
-  color: #343b42;
-  margin-bottom: 20px;
-}
-
 .no-reviews-message {
   font-size: 18px; /* Aumenta el tamaño de la fuente */
   color: #ff5722; /* Color naranja brillante para resaltar */

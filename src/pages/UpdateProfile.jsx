@@ -113,8 +113,8 @@ const [isUploading, setIsUploading] = useState(false);
 
   return (
 
-    
-      <Container className="mt-5">
+  <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}> 
+      <Container className="mt-5  flex-grow-1" >
         <Card className="shadow-lg">
           <Card.Header as="h5" className="text-center bg-primary text-white">👤 Actualizar Perfil</Card.Header>
           <Card.Body>
@@ -274,6 +274,7 @@ const [isUploading, setIsUploading] = useState(false);
           </Card.Body>
         </Card>
       </Container>
+      </div>
   );
 }
 

@@ -27,6 +27,7 @@ import CreateTransactionForm from "./components/transactions/CreateTransactionFo
 import TransactionDetails from "./pages/TransactionDetails";
 
 import WorkList from "./components/work/WorkList";
+import Footer from "./components/footer";
 
 function App() {
 
@@ -34,7 +35,6 @@ function App() {
     <div>
       <NavbarNew />
 
-      <br />
 
       <Routes>
         <Route path="/" element={<EnterPage />} />
@@ -64,6 +64,7 @@ function App() {
 
 
       </Routes>
+      <Footer/>
     </div>
   )
 }
