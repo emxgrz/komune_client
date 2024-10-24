@@ -1,10 +1,9 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import service from "../../services/config"; 
-import { AuthContext } from "../../context/auth.context"; 
-import { Container, Form, Button, Card, Alert } from 'react-bootstrap';
-import SyncLoader from "react-spinners/SyncLoader"; 
-
+import service from "../../services/config";
+import { AuthContext } from "../../context/auth.context";
+import { Container, Form, Button, Card, Alert } from "react-bootstrap";
+import SyncLoader from "react-spinners/SyncLoader";
 
 function CreateTransactionForm() {
   const [title, setTitle] = useState("");
@@ -12,14 +11,14 @@ function CreateTransactionForm() {
   const [status, setStatus] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { loggedUserId } = useContext(AuthContext); 
+  const { loggedUserId } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const { userId } = useParams();
   const { workId } = useParams();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     setLoading(true);
     setError(null);
 
@@ -39,15 +38,19 @@ function CreateTransactionForm() {
       const response = await service.post("/transaction", {
         work: workId,
         professional: userId,
-        client: loggedUserId, 
+        client: loggedUserId,
         title,
         description,
-        status
+        status,
       });
 
       navigate("/my-transactions");
     } catch (error) {
-      setError(error.response?.data?.message || "Ocurrió un error");
+      if (error.response?.status === 500) {
+        navigate("/error");
+      } else {
+        setError(error.response?.data?.message || "Ocurrió un error");
+      }
     } finally {
       setLoading(false);
     }
@@ -56,9 +59,15 @@ function CreateTransactionForm() {
   return (
     <Container className="mt-5">
       <Card>
-        <Card.Header as="h5" className="text-center">Haz tu petición 📩</Card.Header>
+        <Card.Header as="h5" className="text-center">
+          Haz tu petición 📩
+        </Card.Header>
         <Card.Body>
-          {error && <Alert variant="danger">{error}</Alert>} 
+          {error && (
+            <Alert variant="danger">
+              Lo sentimos, algo no está funcionando como debería...
+            </Alert>
+          )}
 
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formTitle" className="mb-3">
@@ -84,13 +93,12 @@ function CreateTransactionForm() {
               />
             </Form.Group>
 
-
             <div className="text-center">
               <Button variant="primary" type="submit" disabled={loading}>
                 {loading ? (
                   <SyncLoader color="#343a40" loading={loading} size={20} />
                 ) : (
-                  'Enviar ▶️'
+                  "Enviar ▶️"
                 )}
               </Button>
             </div>

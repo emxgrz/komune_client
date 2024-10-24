@@ -1,20 +1,15 @@
-import React, { useContext } from 'react'
-import UserDetails from './UserDetails'
-import WorkList from '../components/work/WorkList'
-import ReviewList from '../components/review/ReviewList'
-import { useParams, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/auth.context';
-import { Container, Button } from 'react-bootstrap';
-
-
-
-
+import React, { useContext } from "react";
+import UserDetails from "./UserDetails";
+import WorkList from "../components/work/WorkList";
+import ReviewList from "../components/review/ReviewList";
+import { useParams, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
+import { Container, Button } from "react-bootstrap";
 
 export default function ProfilePage() {
   const { userId } = useParams();
-  const navigate = useNavigate(); 
-  const { loggedUserId } = useContext(AuthContext); 
-
+  const navigate = useNavigate();
+  const { loggedUserId } = useContext(AuthContext);
 
   const handleEditClick = () => {
     navigate(`/edit-page/${userId}`);
@@ -26,7 +21,7 @@ export default function ProfilePage() {
         <Button
           variant="primary"
           onClick={handleEditClick}
-          style={{ marginTop: '20px' }}
+          style={{ marginTop: "20px", marginLeft:"44%" }}
         >
           Editar Perfil
         </Button>
@@ -34,5 +29,5 @@ export default function ProfilePage() {
       <WorkList userId={userId} />
       <ReviewList />
     </Container>
-  )
+  );
 }

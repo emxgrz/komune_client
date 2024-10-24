@@ -1,5 +1,8 @@
 .navbar {
-  background-color: #f8f9fa; }
+  background-color: hsl(210, 17%, 98%); 
+
+}
+
 
 .nav-link {
   color: #007bff;   font-weight: bold ;
@@ -10,7 +13,9 @@
   background-color: #0056b3;   color: white; }
 
 .navbar-brand {
-  font-size: 1.5rem;   color: #007bff;
+  font-size: 1.5rem;   
+  color: #007bff;
+  font-family: 'Abril Fatface', cursive;
 }
 
 .navbar-brand:hover {

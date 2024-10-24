@@ -1,26 +1,24 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import service from '../services/config.js';
-import { AuthContext } from "../context/auth.context.jsx"; 
-import { Button, Form, Card, Container } from 'react-bootstrap';
-import "../styles/reviewDetailsStyle.css"
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import service from "../services/config.js";
+import { AuthContext } from "../context/auth.context.jsx";
+import { Button, Form, Card, Container } from "react-bootstrap";
+import "../styles/reviewDetailsStyle.css";
 import SyncLoader from "react-spinners/SyncLoader";
 
-
-
 function ReviewDetails() {
-  const { id } = useParams(); 
-  const navigate = useNavigate(); 
-  const { isLoggedIn, loggedUserId } = useContext(AuthContext); 
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { isLoggedIn, loggedUserId } = useContext(AuthContext);
 
-  const [review, setReview] = useState(null); 
-  const [loading, setLoading] = useState(true); 
-  const [error, setError] = useState(null); 
-  const [isEditing, setIsEditing] = useState(false); 
+  const [review, setReview] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    rating: '',
-    comment: '',
-  }); 
+    rating: "",
+    comment: "",
+  });
   useEffect(() => {
     const fetchReview = async () => {
       try {
@@ -31,7 +29,11 @@ function ReviewDetails() {
           comment: response.data.comment,
         });
       } catch (error) {
-        setError('Error al cargar los detalles de la reseña');
+        if (error.response?.status === 500) {
+          navigate("/error");
+        } else {
+          setError(error.response?.data?.message || "Ocurrió un error");
+        }
       } finally {
         setLoading(false);
       }
@@ -44,34 +46,36 @@ function ReviewDetails() {
     e.preventDefault();
     if (loggedUserId === review.reviewer._id) {
       try {
-        const response = await service.put(`/review/${id}`, formData); 
-        setReview(response.data); 
+        const response = await service.put(`/review/${id}`, formData);
+        setReview(response.data);
         setIsEditing(false);
-        alert('Reseña actualizada con éxito');
+        alert("Reseña actualizada con éxito");
       } catch (error) {
-        console.error('Error al editar la reseña:', error);
-        alert('Hubo un error al actualizar la reseña.');
+        console.error("Error al editar la reseña:", error);
+        alert("Hubo un error al actualizar la reseña.");
       }
     } else {
-      alert('No tienes permiso para editar esta reseña.');
+      alert("No tienes permiso para editar esta reseña.");
     }
   };
 
   const handleDelete = async () => {
     if (loggedUserId === review.reviewer._id) {
-      const confirmDelete = window.confirm('¿Estás seguro de que deseas eliminar esta reseña?');
+      const confirmDelete = window.confirm(
+        "¿Estás seguro de que deseas eliminar esta reseña?"
+      );
       if (confirmDelete) {
         try {
-          await service.delete(`/review/${id}`); 
-          alert('Reseña eliminada con éxito');
-          navigate(`/my-page/${loggedUserId}`); 
+          await service.delete(`/review/${id}`);
+          alert("Reseña eliminada con éxito");
+          navigate(`/my-page/${loggedUserId}`);
         } catch (error) {
-          console.error('Error al eliminar la reseña:', error);
-          alert('Hubo un error al eliminar la reseña.');
+          console.error("Error al eliminar la reseña:", error);
+          alert("Hubo un error al eliminar la reseña.");
         }
       }
     } else {
-      alert('No tienes permiso para eliminar esta reseña.');
+      alert("No tienes permiso para eliminar esta reseña.");
     }
   };
 
@@ -92,7 +96,11 @@ function ReviewDetails() {
   }
 
   if (error) {
-    return <p>{error}</p>;
+    if (error.response?.status === 500) {
+      navigate("/error");
+    } else {
+      setError(error.response?.data?.message || "Ocurrió un error");
+    }
   }
 
   return (
@@ -125,8 +133,14 @@ function ReviewDetails() {
               </Form.Group>
 
               <div className="button-group">
-                <Button variant="primary" type="submit">Guardar Cambios</Button>
-                <Button variant="secondary" type="button" onClick={() => setIsEditing(false)}>
+                <Button variant="primary" type="submit">
+                  Guardar Cambios
+                </Button>
+                <Button
+                  variant="secondary"
+                  type="button"
+                  onClick={() => setIsEditing(false)}
+                >
                   Cancelar
                 </Button>
               </div>
@@ -140,8 +154,12 @@ function ReviewDetails() {
 
               {loggedUserId === review.reviewer._id && (
                 <div className="button-group mt-3">
-                  <Button variant="warning" onClick={() => setIsEditing(true)}>Editar</Button>
-                  <Button variant="danger" onClick={handleDelete}>Eliminar</Button>
+                  <Button variant="warning" onClick={() => setIsEditing(true)}>
+                    Editar
+                  </Button>
+                  <Button variant="danger" onClick={handleDelete}>
+                    Eliminar
+                  </Button>
                 </div>
               )}
             </div>

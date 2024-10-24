@@ -1,16 +1,14 @@
 import React, { useEffect, useState, useParams } from "react";
-import service from "../../services/config"; 
-import WorkCard from "./WorkCard"; 
-import { Card, Container } from 'react-bootstrap';
-import "../../styles/workListStyle.css"
+import service from "../../services/config";
+import WorkCard from "./WorkCard";
+import { Card, Container } from "react-bootstrap";
+import "../../styles/workListStyle.css";
 import SyncLoader from "react-spinners/SyncLoader";
 
-
-function WorkList({userId}) {
+function WorkList({ userId }) {
   const [works, setWorks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
 
   useEffect(() => {
     const fetchWorks = async () => {
@@ -24,14 +22,14 @@ function WorkList({userId}) {
         console.log(response.data);
         setWorks(response.data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchWorks();
-  }, [userId])
+  }, [userId]);
 
   if (loading) {
     return (
@@ -47,11 +45,8 @@ function WorkList({userId}) {
 
   return (
     <div className="work-list mt-5">
-      
       {works.length === 0 ? (
-        <p className="no-reviews-message">
-  📭 No hay trabajos disponibles.
-</p>
+        <p className="no-reviews-message">📭 No hay trabajos disponibles.</p>
       ) : (
         <div className="row">
           {works.map((work) => (
@@ -60,7 +55,7 @@ function WorkList({userId}) {
                 id={work._id}
                 title={work.title}
                 description={work.description || "Descripción no disponible."}
-                professional={work.professional.username} 
+                professional={work.professional.username}
                 image={work.professional.image}
                 professionalId={work.professional._id}
               />

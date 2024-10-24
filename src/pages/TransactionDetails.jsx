@@ -1,25 +1,26 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import service from "../services/config.js";
-import { Container, Card, Button } from 'react-bootstrap';
+import { Container, Card, Button } from "react-bootstrap";
 import "../styles/transactionDetailsStyle.css";
 import SyncLoader from "react-spinners/SyncLoader";
-import { AuthContext } from '../context/auth.context';
+import { AuthContext } from "../context/auth.context";
 
 function TransactionDetails() {
   const [transaction, setTransaction] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const { loggedUserId } = useContext(AuthContext); 
+  const { loggedUserId } = useContext(AuthContext);
 
-  // Nueva función para manejar el cambio de estado
   const handleChangeStatus = async (newStatus) => {
     try {
-      const response = await service.put(`/transaction/${id}`, { status: newStatus });
-      setTransaction(prevTransaction => ({
+      const response = await service.put(`/transaction/${id}`, {
+        status: newStatus,
+      });
+      setTransaction((prevTransaction) => ({
         ...prevTransaction,
-        status: response.data.status
+        status: response.data.status,
       }));
     } catch (error) {
       console.error("Error al cambiar el estado:", error);
@@ -52,12 +53,12 @@ function TransactionDetails() {
   }
 
   if (error) {
-    return <p>{error}</p>;
+    if (error.response?.status === 500) {
+      navigate("/error");
+    } else {
+      setError(error.response?.data?.message || "Ocurrió un error");
+    }
   }
-
-  console.log("ID USER", loggedUserId);
-  console.log("ID prof", transaction.professional._id);
-  console.log("transaction", transaction.status);
 
   return (
     <Container className="mt-5">
@@ -68,7 +69,8 @@ function TransactionDetails() {
               <h3>Trabajo: {transaction.work.title} 🎨</h3>
             </Card.Title>
             <Card.Text>
-              <strong>Descripción del trabajo:</strong> {transaction.work.description}
+              <strong>Descripción del trabajo:</strong>{" "}
+              {transaction.work.description}
             </Card.Text>
 
             <hr className="my-4" />
@@ -102,19 +104,31 @@ function TransactionDetails() {
 
             <Card className="mt-4 transaction-card text-center">
               <Card.Body>
-                <Card.Title className="mb-3"><strong>Detalles de la Transacción</strong></Card.Title>
+                <Card.Title className="mb-3">
+                  <strong>Detalles de la Transacción</strong>
+                </Card.Title>
                 <div className="transaction-details">
-                  <span className="transaction-label"><strong>Título:</strong></span>
+                  <span className="transaction-label">
+                    <strong>Título:</strong>
+                  </span>
                   <span className="transaction-value">{transaction.title}</span>
                 </div>
                 <div className="transaction-details">
-                  <span className="transaction-label"><strong>Descripción:</strong></span>
-                  <span className="transaction-value">{transaction.description}</span>
+                  <span className="transaction-label">
+                    <strong>Descripción:</strong>
+                  </span>
+                  <span className="transaction-value">
+                    {transaction.description}
+                  </span>
                 </div>
                 {transaction.status && (
                   <div className="transaction-details">
-                    <span className="transaction-label"><strong>Estado:</strong></span>
-                    <span className="transaction-value">{transaction.status}</span>
+                    <span className="transaction-label">
+                      <strong>Estado:</strong>
+                    </span>
+                    <span className="transaction-value">
+                      {transaction.status}
+                    </span>
                   </div>
                 )}
               </Card.Body>
@@ -122,37 +136,47 @@ function TransactionDetails() {
                 <>
                   {transaction.status === "" && (
                     <>
-                    <div className="d-flex justify-content-center">
-                      <Button 
-                        variant="primary" 
-                        style={{ maxWidth: "300px", marginRight: "20px", marginBottom: "5px"}} 
-                        onClick={() => handleChangeStatus("en progreso")}
-                      >
-                        Aceptar oferta ⏯️
-                      </Button>
-                      <Button 
-                        variant="danger" 
-                        style={{ maxWidth: "300px", marginBottom: "5px"}} 
-                        onClick={() => handleChangeStatus("rechazada")}
-                      >
-                        Rechazar oferta ❌
-                      </Button>
+                      <div className="d-flex justify-content-center">
+                        <Button
+                          variant="primary"
+                          style={{
+                            maxWidth: "300px",
+                            marginRight: "20px",
+                            marginBottom: "5px",
+                          }}
+                          onClick={() => handleChangeStatus("en progreso")}
+                        >
+                          Aceptar oferta ⏯️
+                        </Button>
+                        <Button
+                          variant="danger"
+                          style={{ maxWidth: "300px", marginBottom: "5px" }}
+                          onClick={() => handleChangeStatus("rechazada")}
+                        >
+                          Rechazar oferta ❌
+                        </Button>
                       </div>
                     </>
                   )}
                   {transaction.status === "en progreso" && (
-                    <Button variant="primary" onClick={() => handleChangeStatus("completado")}>
+                    <Button
+                      variant="primary"
+                      onClick={() => handleChangeStatus("completado")}
+                    >
                       Trabajo completado ✅
                     </Button>
                   )}
                 </>
               )}
-
             </Card>
 
             {transaction.status === "completado" && (
-              <Link to={`/review-form/${transaction._id}/${transaction.professional._id}`}>
-                <Button variant="primary" className="mt-3">Dejar una Reseña 📝</Button>
+              <Link
+                to={`/review-form/${transaction._id}/${transaction.professional._id}`}
+              >
+                <Button variant="primary" className="mt-3">
+                  Dejar una Reseña 📝
+                </Button>
               </Link>
             )}
           </Card.Body>

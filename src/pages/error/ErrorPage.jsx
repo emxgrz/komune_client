@@ -3,7 +3,7 @@ import { Container, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FaExclamationTriangle } from "react-icons/fa";
 
-function Error404() {
+function ErrorPage() {
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -13,7 +13,7 @@ function Error404() {
   return (
     <Container className="text-center mt-5">
       <FaExclamationTriangle size={64} color="#dc3545" className="mb-4" />
-      <h1 className="mb-3">Página no encontrada</h1>
+      <h1 className="mb-3">¡Ups! Algo salió mal</h1>
       <p
         className="mb-4 mx-auto"
         style={{
@@ -22,9 +22,9 @@ function Error404() {
           border: "1px solid black",
         }}
       >
-        Lo sentimos, no hemos podido encontrar la página que buscas 🕵🏻 Pero no
-        te preocupes, puedes volver a la página anterior o ir a la página
-        principal 👩‍🚀
+        Lo sentimos, ha ocurrido un error inesperado. Nuestros técnicos están
+        trabajando duro para resolverlo. Mientras tanto, puedes volver a la
+        página anterior o ir a la página principal 👩‍🚀
       </p>
 
       <Button variant="primary" onClick={goBack} className="me-2">
@@ -37,4 +37,4 @@ function Error404() {
   );
 }
 
-export default Error404;
+export default ErrorPage;

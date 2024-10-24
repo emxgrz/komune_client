@@ -30,6 +30,9 @@ import TransactionDetails from "./pages/TransactionDetails";
 import WorkList from "./components/work/WorkList";
 import Footer from "./components/Footer";
 
+import ErrorPage from "./pages/error/ErrorPage";
+import Error404 from "./pages/error/Error404";
+
 function App() {
 
   return (
@@ -60,6 +63,12 @@ function App() {
           <Route path="/my-transactions" element={<Private><TransactionPage /></Private>} />
           <Route path="/transaction/:id" element={<Private><TransactionDetails /></Private>} />
           <Route path="/transaction-form/:userId/:workId" element={<Private><CreateTransactionForm /></Private>} />
+
+
+          <Route path="/error" element={<ErrorPage />} />
+          <Route path="/*" element={<Error404 />} />
+
+
         </Routes>
       </div>
 

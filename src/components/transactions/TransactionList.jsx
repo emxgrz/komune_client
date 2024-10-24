@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import service from "../../services/config"; 
-import TransactionCard from "./TransactionCard"; 
-import { Container, Row, Col } from 'react-bootstrap';
-import "../../styles/transactionListStyle.css"
+import service from "../../services/config";
+import TransactionCard from "./TransactionCard";
+import { Container, Row, Col } from "react-bootstrap";
+import "../../styles/transactionListStyle.css";
 import SyncLoader from "react-spinners/SyncLoader";
-
-
 
 function TransactionList() {
   const [transactions, setTransactions] = useState([]);
@@ -15,10 +13,9 @@ function TransactionList() {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await service.get("/transaction"); 
+        const response = await service.get("/transaction");
         setTransactions(response.data);
-        console.log(response.data)
-
+        console.log(response.data);
       } catch (error) {
         setError("Error al cargar las transacciones");
       } finally {
@@ -43,11 +40,10 @@ function TransactionList() {
 
   return (
     <Container className="mt-5">
-      {/* <h2 className="text-center mb-4">Lista de Transacciones</h2> */}
       {transactions.length === 0 ? (
         <p className="no-reviews-message">
-        📭 Todavía no tienes ningún intercambio de servicios.
-      </p>
+          📭 Todavía no tienes ningún intercambio de servicios.
+        </p>
       ) : (
         <Row>
           {transactions.map((transaction) => (
@@ -55,8 +51,14 @@ function TransactionList() {
               <TransactionCard
                 id={transaction._id}
                 title={transaction.title || "Título no disponible"}
-                description={transaction.description || "Descripción no disponible"}
-                client={transaction.client ? transaction.client.username : "Cliente no disponible"}
+                description={
+                  transaction.description || "Descripción no disponible"
+                }
+                client={
+                  transaction.client
+                    ? transaction.client.username
+                    : "Cliente no disponible"
+                }
                 status={transaction.status}
               />
             </Col>

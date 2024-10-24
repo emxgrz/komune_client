@@ -1,16 +1,13 @@
 import { useContext } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { spread } from "axios";
-import OurMission from "../pages/OurMission";
 import { Navbar, Nav, Container } from "react-bootstrap";
 
 function NavbarNew() {
   const navigate = useNavigate();
   const { isLoggedIn, loggedUserId, authenticateUser } =
     useContext(AuthContext);
-
-  const { userId } = useParams();
 
   const handleLogout = async () => {
     const confirmation = window.confirm("¿Estás segura?");
@@ -50,25 +47,24 @@ function NavbarNew() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             {" "}
-            {/* Alinear elementos a la derecha */}
             {!isLoggedIn && (
               <Nav.Link as={Link} to="/our-mission" className="nav-button">
-                Our Mission
+                our mission
               </Nav.Link>
             )}
             {!isLoggedIn && (
               <Nav.Link as={Link} to="/signup" className="nav-button">
-                Registro
+                registro
               </Nav.Link>
             )}
             {!isLoggedIn && (
               <Nav.Link as={Link} to="/login" className="nav-button">
-                Acceso
+                acceso
               </Nav.Link>
             )}
             {isLoggedIn && (
               <Nav.Link as={Link} to={`/search`} className="nav-button">
-                Search
+                search
               </Nav.Link>
             )}
             {isLoggedIn && (
@@ -77,7 +73,7 @@ function NavbarNew() {
                 to={`/my-transactions`}
                 className="nav-button"
               >
-                Transactions
+                transactions
               </Nav.Link>
             )}
             {isLoggedIn && (
@@ -86,12 +82,12 @@ function NavbarNew() {
                 to={`/my-page/${loggedUserId}`}
                 className="nav-button"
               >
-                Mi Perfil
+                perfil
               </Nav.Link>
             )}
             {isLoggedIn && (
               <Nav.Link onClick={handleLogout} className="nav-button">
-                Cerrar Sesión
+                cerrar sesión
               </Nav.Link>
             )}
           </Nav>

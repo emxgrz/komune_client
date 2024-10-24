@@ -4,3 +4,16 @@
 
 .custom-button:hover {
   background-color: rgb(7, 25, 189);   border-color: darkblue; }
+
+  .impact-text h1 {
+    font-family: 'Abril Fatface', cursive; 
+        font-size: 3rem;  
+    margin: 10px 0; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+  }
+  
+  .custom-button {
+    margin-top: 20px;
+  }
+  

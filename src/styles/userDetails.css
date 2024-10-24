@@ -5,3 +5,18 @@
   background-color: #f8f9fa; 
   font-weight: bold;
 }
+
+.badge-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;  /* Ancho fijo para todos los badges */
+}
+
+.badge-fixed {
+  width: 85%;  /* Ocupa el 100% del ancho del contenedor */
+  text-align: center;  /* Centra el texto horizontalmente */
+  padding: 10px;  /* Espacio interno para mayor claridad visual */
+  font-size: 14px;  /* Tamaño del texto dentro del badge */
+  white-space: nowrap;  /* Evita que el texto se rompa en varias líneas */
+}

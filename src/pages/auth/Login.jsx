@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context.jsx";
 import { Container, Form, Button, Alert, Card } from "react-bootstrap";
-import SyncLoader from "react-spinners/SyncLoader"; 
+import SyncLoader from "react-spinners/SyncLoader";
 import "../../styles/signupLogin.css";
 
 function Login() {
@@ -13,14 +13,14 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true); 
+    setLoading(true);
     try {
       const userCredentials = {
         email,
@@ -36,20 +36,22 @@ function Login() {
       navigate(`/home`);
     } catch (error) {
       console.log(error);
-      if (error.response && error.response.status === 400) {
-        setErrorMessage(error.response.data.message);
+      if (error.response?.status === 500) {
+        navigate("/error");
       } else {
-        console.log("aquí debería redireccionar a pag de error");
+        setError(error.response?.data?.message || "Ocurrió un error");
       }
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   return (
     <Container className="mt-5 d-flex justify-content-center">
       <Card className="p-4 shadow" style={{ width: "100%", maxWidth: "400px" }}>
-        <h1 className="mb-4 text-center">Accede a un mundo de posibilidades ▶️</h1>
+        <h1 className="mb-4 text-center">
+          Accede a un mundo de posibilidades ▶️
+        </h1>
 
         <Form onSubmit={handleLogin}>
           <Form.Group controlId="formEmail">
@@ -60,7 +62,7 @@ function Login() {
               value={email}
               onChange={handleEmailChange}
               required
-              size="lg" 
+              size="lg"
             />
           </Form.Group>
 
@@ -72,7 +74,7 @@ function Login() {
               value={password}
               onChange={handlePasswordChange}
               required
-              size="lg" 
+              size="lg"
             />
           </Form.Group>
 
@@ -81,12 +83,20 @@ function Login() {
             type="submit"
             className="mt-4 w-100"
             style={{ transition: "background-color 0.3s" }}
-            disabled={loading} 
+            disabled={loading}
           >
-            {loading ? <SyncLoader color="#343a40" loading={loading} size={10} /> : "Accede al mundo komune 💡"}
+            {loading ? (
+              <SyncLoader color="#343a40" loading={loading} size={10} />
+            ) : (
+              "Accede al mundo komune 💡"
+            )}
           </Button>
 
-          {errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert>}
+          {errorMessage && (
+            <Alert variant="danger" className="mt-3">
+              No se ha podido iniciar sesión
+            </Alert>
+          )}
         </Form>
       </Card>
     </Container>

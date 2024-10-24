@@ -1,48 +1,61 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import service from '../../services/config'; 
-import { AuthContext } from '../../context/auth.context'; 
-import { Container, Card, Form, Button, Alert } from 'react-bootstrap'; 
-import SyncLoader from 'react-spinners/SyncLoader'; function CreateWorkForm() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [skills, setSkills] = useState([]); 
-  const [loading, setLoading] = useState(false);   const { loggedUserId } = useContext(AuthContext); 
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import service from "../../services/config";
+import { AuthContext } from "../../context/auth.context";
+import { Container, Card, Form, Button, Alert } from "react-bootstrap";
+import SyncLoader from "react-spinners/SyncLoader";
+function CreateWorkForm() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [skills, setSkills] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { loggedUserId } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const professional = loggedUserId;
-    setLoading(true); 
+    setLoading(true);
     try {
-      const response = await service.post('/work', {
+      const response = await service.post("/work", {
         title,
         description,
         professional,
-        skills, 
+        skills,
       });
-      
-      console.log('Nuevo trabajo creado:', response.data);
-      navigate('/home'); 
+
+      console.log("Nuevo trabajo creado:", response.data);
+      navigate("/home");
     } catch (error) {
-      console.error('Error al crear el trabajo:', error);
+      if (error.response?.status === 500) {
+        navigate("/error");
+      } else {
+        setError(error.response?.data?.message || "Ocurrió un error");
+      }
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   const handleSkillsChange = (e) => {
     const value = e.target.value;
-    const skillsArray = value.split(',').map(skill => skill.trim()); 
+    const skillsArray = value.split(",").map((skill) => skill.trim());
     setSkills(skillsArray);
   };
 
   return (
     <Container className="mt-5">
       <Card>
-        <Card.Header as="h5" className="text-center">Oferta aquí tu trabajo 👇</Card.Header>
+        <Card.Header as="h5" className="text-center">
+          Oferta aquí tu trabajo 👇
+        </Card.Header>
         <Card.Body>
+          {error && (
+            <Alert variant="danger">
+              Lo sentimos, algo no está funcionando como debería...
+            </Alert>
+          )}
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formTitle" className="mb-3">
               <Form.Label>Título ✒️</Form.Label>
@@ -81,7 +94,7 @@ import SyncLoader from 'react-spinners/SyncLoader'; function CreateWorkForm() {
                 {loading ? (
                   <SyncLoader color="#343a40" loading={loading} size={8} />
                 ) : (
-                  'Crear Servicio'
+                  "Crear Servicio"
                 )}
               </Button>
             </div>
