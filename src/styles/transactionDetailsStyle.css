@@ -1,11 +1,20 @@
-h2 {
-  color: #343a40;
-}
-.card {
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.transaction-details {
+  display: flex;
+  justify-content: space-between; /* Espacio entre etiquetas y valores */
+  margin-bottom: 10px; /* Espaciado entre las líneas */
 }
 
-.card-body {
-  padding: 20px;
+.transaction-label {
+  font-weight: bold; /* Hacer que las etiquetas sean más visibles */
+  min-width: 100px; /* Ancho mínimo para las etiquetas */
+  text-align: left; /* Alinear texto a la izquierda */
+}
+
+.transaction-value {
+  text-align: left; /* Alinear texto a la izquierda */
+}
+
+.review-card{
+  margin-top: -50px;
+  margin-bottom: 30px;
 }

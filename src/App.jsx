@@ -35,7 +35,6 @@ function App() {
       <NavbarNew />
 
       <br />
-      <hr />
 
       <Routes>
         <Route path="/" element={<EnterPage />} />

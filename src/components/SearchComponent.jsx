@@ -94,17 +94,19 @@ function WorkSearch() {
           <p>Cargando...</p>
         </div>
       ) : (
-        <div>
+        <div className="row">
           {works.length > 0 ? (
             works.map((work) => (
+              <div className="col-md-4 mb-4" key={work._id}>
               <WorkCard
                 key={work._id}
                 id={work._id}
                 title={work.title}
                 description={work.description || "Descripción no disponible."}
                 professional={work.professional.username}
-                image={work.professional.image} // Asegúrate de pasar la imagen si la necesitas
+                image={work.professional.image} 
               />
+              </div>
             ))
           ) : (
             searchOn && (

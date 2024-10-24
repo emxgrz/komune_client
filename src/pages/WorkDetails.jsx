@@ -98,83 +98,91 @@ function WorkDetails() {
   }
 
   return (
-    <Container className="mt-5">
-      <h2 className="text-center mb-4">Detalles del Trabajo</h2>
-      {work ? (
-        <Card className="p-4 shadow-sm">
-          {isEditing ? (
-            <Form onSubmit={handleEdit}>
-              <Form.Group controlId="title">
-                <Form.Label>Título:</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={formData.title}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group controlId="description" className="mt-3">
-                <Form.Label>Descripción:</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  value={formData.description}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group controlId="skills" className="mt-3">
-                <Form.Label>Habilidades (separadas por comas):</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={formData.skills.join(", ")}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      skills: e.target.value
-                        .split(",")
-                        .map((skill) => skill.trim()),
-                    }))
-                  }
-                />
-              </Form.Group>
-
-              <div className="mt-4">
-                <Button variant="primary" type="submit">
-                  Guardar Cambios
-                </Button>
-                <Button variant="secondary" className="ml-2" onClick={() => setIsEditing(false)}>
-                  Cancelar
-                </Button>
-              </div>
-            </Form>
-          ) : (
-            <div>
-              <h3>{work.title}</h3>
-              <p>{work.description}</p>
-              <p>
-                <strong>Habilidades:</strong>{" "}
-                {work.skills.length > 0 ? work.skills.join(", ") : "Ninguna"}
-              </p>
-              <p><strong>Profesional:</strong> {work.professional.username}</p>
-              <Link to={`/transaction-form/${work.professional._id}/${work._id}`}>
-                <Button variant="primary">¡Interesado? Haz clic aquí!</Button>
-              </Link>
-
-              {loggedUserId === work.professional._id && (
-                <div className="mt-3">
-                  <Button variant="warning" className="me-2" onClick={() => setIsEditing(true)}>Editar</Button>
-                  <Button variant="danger" className="ml-2" onClick={handleDelete}>Eliminar</Button>
+    
+      <Container className="mt-5">
+        {/* <h2 className="text-center mb-4">Detalles del Trabajo</h2> */}
+        {work ? (
+          <Card className="p-4 shadow-sm">
+            {isEditing ? (
+              <Form onSubmit={handleEdit}>
+                <Form.Group controlId="title">
+                  <Form.Label>Título:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={formData.title}
+                    onChange={handleChange}
+                    required
+                    className="border border-primary"
+                  />
+                </Form.Group>
+  
+                <Form.Group controlId="description" className="mt-3">
+                  <Form.Label>Descripción:</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    value={formData.description}
+                    onChange={handleChange}
+                    required
+                    className="border border-primary"
+                  />
+                </Form.Group>
+  
+                <Form.Group controlId="skills" className="mt-3">
+                  <Form.Label>Habilidades (separadas por comas):</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={formData.skills.join(", ")}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        skills: e.target.value.split(",").map((skill) => skill.trim()),
+                      }))
+                    }
+                    className="border border-primary"
+                  />
+                </Form.Group>
+  
+                <div className="mt-4">
+                  <Button variant="primary" type="submit" className="me-2">
+                    Guardar Cambios
+                  </Button>
+                  <Button variant="secondary" onClick={() => setIsEditing(false)}>
+                    Cancelar
+                  </Button>
                 </div>
-              )}
-            </div>
-          )}
-        </Card>
-      ) : (
-        <p>No se encontraron detalles del trabajo.</p>
-      )}
-    </Container>
+              </Form>
+            ) : (
+              <div>
+                <h3 className="text-primary">{work.title}</h3>
+                <p>{work.description}</p>
+                <p>
+                  <strong>Habilidades:</strong>{" "}
+                  {work.skills.length > 0 ? work.skills.join(", ") : "Ninguna"}
+                </p>
+                <p><strong>Profesional: </strong>
+                <Link to={`/profiles/${work.professional._id}`} style={{ textDecoration: "none", color: "#007bff", fontWeight: "bold" }}>
+                {work.professional.username}
+              </Link>
+              </p>
+                {loggedUserId !== work.professional._id && (
+              <Link to={`/transaction-form/${work.professional._id}/${work._id}`} >
+                <Button variant="primary" className="mt-2">¡Interesado? Haz clic aquí!</Button>
+              </Link>
+            )}
+  
+                {loggedUserId === work.professional._id && (
+                  <div className="mt-3">
+                    <Button variant="warning" className="me-2" onClick={() => setIsEditing(true)}>Editar</Button>
+                    <Button variant="danger" onClick={handleDelete}>Eliminar</Button>
+                  </div>
+                )}
+              </div>
+            )}
+          </Card>
+        ) : (
+          <Alert variant="warning" className="text-center">No se encontraron detalles del trabajo.</Alert>
+        )}
+      </Container>
   );
 }
 

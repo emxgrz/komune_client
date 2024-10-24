@@ -45,7 +45,7 @@ function Signup() {
   return (
     <Container className="mt-5 d-flex justify-content-center">
       <Card className="p-4 shadow" style={{ width: '100%', maxWidth: '400px' }}>
-        <h1 className="mb-4 text-center">Formulario de Registro</h1>
+        <h1 className="mb-4 text-center">Súmate al cambio 🔁</h1>
 
         <Form onSubmit={handleSignup}>
           <Form.Group controlId="formEmail">
@@ -85,7 +85,7 @@ function Signup() {
           </Form.Group>
 
           <Button variant="primary" type="submit" className="mt-4 w-100" style={{ transition: 'background-color 0.3s' }}>
-            Registrar
+            ¡Comencemos!
           </Button>
 
           {errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert>}

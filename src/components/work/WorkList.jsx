@@ -43,7 +43,7 @@ function WorkList({userId}) {
 
   return (
     <div className="work-list mt-5">
-      <h2 className="text-center mb-4">Lista de Trabajos</h2>
+      {/* <h2 className="text-center mb-4">Lista de Trabajos</h2> */}
       {works.length === 0 ? (
         <Card className="text-center">
           <Card.Body>

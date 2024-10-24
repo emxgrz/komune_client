@@ -13,6 +13,7 @@ function ReviewList() {
       setLoading(true);
       try {
         const response = await service.get("/review"); 
+        console.log(response)
         setReviews(response.data); 
       } catch (err) {
         setError("Error al cargar las reseñas");
@@ -35,7 +36,7 @@ function ReviewList() {
 
   return (
     <div className="review-list">
-      <h2>Lista de Reseñas</h2>
+      {/* <h2>Lista de Reseñas</h2> */}
       {reviews.length === 0 ? (
         <p>No hay reseñas disponibles.</p>
       ) : (
@@ -49,6 +50,7 @@ function ReviewList() {
               transaction={review.transaction ? review.transaction.description : "Transacción no disponible"}
               rating={review.rating}
               comment={review.comment || "Comentario no disponible"}
+              date={review.createdAt}
             />
           ))}
         </div>

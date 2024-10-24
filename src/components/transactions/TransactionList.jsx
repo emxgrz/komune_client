@@ -36,7 +36,7 @@ function TransactionList() {
 
   return (
     <Container className="mt-5">
-      <h2 className="text-center mb-4">Lista de Transacciones</h2>
+      {/* <h2 className="text-center mb-4">Lista de Transacciones</h2> */}
       {transactions.length === 0 ? (
         <p>No hay transacciones disponibles.</p>
       ) : (

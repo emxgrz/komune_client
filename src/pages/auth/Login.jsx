@@ -51,7 +51,7 @@ function Login() {
   return (
     <Container className="mt-5 d-flex justify-content-center">
       <Card className="p-4 shadow" style={{ width: '100%', maxWidth: '400px' }}>
-        <h1 className="mb-4 text-center">Formulario de Acceso</h1>
+        <h1 className="mb-4 text-center">Accede a un mundo de posibilidades ▶️</h1>
 
         <Form onSubmit={handleLogin}>
           <Form.Group controlId="formEmail">
@@ -79,7 +79,7 @@ function Login() {
           </Form.Group>
 
           <Button variant="primary" type="submit" className="mt-4 w-100" style={{ transition: 'background-color 0.3s' }}>
-            Acceder
+            Accede al mundo komune 💡
           </Button>
 
           {errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert>}

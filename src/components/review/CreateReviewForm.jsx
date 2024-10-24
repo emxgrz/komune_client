@@ -57,10 +57,10 @@ function CreateReviewForm() {
 
   return (
     <Container className="mt-5">
-      <h2 className="text-center mb-4">Crear Reseña</h2>
+      <h2 className="text-center mb-4">🌟 Crear Reseña 🌟</h2>
       <Form onSubmit={handleSubmit} className="create-review-form">
         <Form.Group controlId="formRating">
-          <Form.Label>Calificación</Form.Label>
+          <Form.Label>Calificación ⭐</Form.Label>
           <Form.Control
             type="number"
             value={rating}
@@ -74,7 +74,7 @@ function CreateReviewForm() {
         </Form.Group>
 
         <Form.Group controlId="formComment">
-          <Form.Label>Comentario (opcional)</Form.Label>
+          <Form.Label>Comentario (opcional) 💬</Form.Label>
           <Form.Control
             as="textarea"
             rows={3}
@@ -86,8 +86,8 @@ function CreateReviewForm() {
         </Form.Group>
 
         <div className="text-center">
-          <Button variant="primary" type="submit">
-            Crear Reseña
+          <Button variant="primary" type="submit" className="mt-3">
+            ✍️ Crear Reseña
           </Button>
         </div>
       </Form>

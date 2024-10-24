@@ -113,168 +113,167 @@ const [isUploading, setIsUploading] = useState(false);
 
   return (
 
-    <Container className="mt-5">
-    <Card>
-      <Card.Header as="h5" className="text-center">Actualizar Perfil</Card.Header>
-      <Card.Body>
-        {error && <Alert variant="danger">{error}</Alert>}
-
-        <Form onSubmit={handleSubmit}>
-          <Row className="mb-3">
-            <Col md={6}>
-              {/* Username */}
-              <Form.Group controlId="formUsername">
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="username"
-                  value={userData.username || ''}
-                  onChange={handleChange}
-                  placeholder="Ingrese su nombre de usuario"
-                  required
-                />
-              </Form.Group>
-            </Col>
-
-            <Col md={6}>
-              {/* Email */}
-              <Form.Group controlId="formEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  value={userData.email || ''}
-                  onChange={handleChange}
-                  placeholder="Ingrese su correo electrónico"
-                  required
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row className="mb-3">
-            <Col md={6}>
-              {/* First Name */}
-              <Form.Group controlId="formFirstName">
-                <Form.Label>Nombre</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="firstName"
-                  value={userData.firstName || ''}
-                  onChange={handleChange}
-                  placeholder="Ingrese su nombre"
-                />
-              </Form.Group>
-            </Col>
-
-            <Col md={6}>
-              {/* Last Name */}
-              <Form.Group controlId="formLastName">
-                <Form.Label>Apellido</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="lastName"
-                  value={userData.lastName || ''}
-                  onChange={handleChange}
-                  placeholder="Ingrese su apellido"
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row className="mb-3">
-            <Col md={6}>
-              {/* Date of Birth */}
-              <Form.Group controlId="formDateOfBirth">
-                <Form.Label>Fecha de Nacimiento</Form.Label>
-                <Form.Control
-                  type="date"
-                  name="dateOfBirth"
-                  value={userData.dateOfBirth ? userData.dateOfBirth.substring(0, 10) : ''}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Col>
-
-            <Col md={6}>
-              {/* City */}
-              <Form.Group controlId="formCity">
-                <Form.Label>Ciudad</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="location.city"
-                  value={userData.location?.city || ''}
-                  onChange={handleChange}
-                  placeholder="Ingrese su ciudad"
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row className="mb-3">
-            <Col md={6}>
-              {/* Country */}
-              <Form.Group controlId="formCountry">
-                <Form.Label>País</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="location.country"
-                  value={userData.location?.country || ''}
-                  onChange={handleChange}
-                  placeholder="Ingrese su país"
-                />
-              </Form.Group>
-            </Col>
-
-            <Col md={6}>
-              {/* Description */}
-              <Form.Group controlId="formDescription">
-                <Form.Label>Descripción</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  name="description"
-                  value={userData.description || ''}
-                  onChange={handleChange}
-                  placeholder="Escriba una breve descripción"
-                  rows={3}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row className="mb-3">
-            <Col md={6}>
-              {/* Image Upload */}
-              <Form.Group controlId="formImage">
-                <Form.Label>Imagen de Perfil</Form.Label>
-                <Form.Control
-                  type="file"
-                  name="image"
-                  onChange={handleFileUpload}
-                  disabled={isUploading}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          {/* Uploading Status */}
-          {isUploading && <Alert variant="info">... Subiendo imagen</Alert>}
-          {imageUrl && (
-            <div className="mb-3 text-center">
-              <img src={imageUrl} alt="Imagen de perfil" width={150} />
-            </div>
-          )}
-
-          {/* Submit Button */}
-          <div className="text-center">
-            <Button variant="primary" type="submit">
-              Actualizar Perfil
-            </Button>
-          </div>
-        </Form>
-      </Card.Body>
-    </Card>
-  </Container>
+    
+      <Container className="mt-5">
+        <Card className="shadow-lg">
+          <Card.Header as="h5" className="text-center bg-primary text-white">👤 Actualizar Perfil</Card.Header>
+          <Card.Body>
+            {error && <Alert variant="danger">{error}</Alert>}
+  
+            <Form onSubmit={handleSubmit}>
+              <Row className="mb-3">
+                <Col md={6}>
+                  <Form.Group controlId="formUsername">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="username"
+                      value={userData.username || ''}
+                      onChange={handleChange}
+                      placeholder="Ingrese su nombre de usuario"
+                      required
+                      className="custom-input" // Clase personalizada para el input
+                    />
+                  </Form.Group>
+                </Col>
+  
+                <Col md={6}>
+                  <Form.Group controlId="formEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      value={userData.email || ''}
+                      onChange={handleChange}
+                      placeholder="Ingrese su correo electrónico"
+                      required
+                      className="custom-input"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+  
+              <Row className="mb-3">
+                <Col md={6}>
+                  <Form.Group controlId="formFirstName">
+                    <Form.Label>Nombre</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="firstName"
+                      value={userData.firstName || ''}
+                      onChange={handleChange}
+                      placeholder="Ingrese su nombre"
+                      className="custom-input"
+                    />
+                  </Form.Group>
+                </Col>
+  
+                <Col md={6}>
+                  <Form.Group controlId="formLastName">
+                    <Form.Label>Apellido</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="lastName"
+                      value={userData.lastName || ''}
+                      onChange={handleChange}
+                      placeholder="Ingrese su apellido"
+                      className="custom-input"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+  
+              <Row className="mb-3">
+                <Col md={6}>
+                  <Form.Group controlId="formDateOfBirth">
+                    <Form.Label>Fecha de Nacimiento</Form.Label>
+                    <Form.Control
+                      type="date"
+                      name="dateOfBirth"
+                      value={userData.dateOfBirth ? userData.dateOfBirth.substring(0, 10) : ''}
+                      onChange={handleChange}
+                      className="custom-input"
+                    />
+                  </Form.Group>
+                </Col>
+  
+                <Col md={6}>
+                  <Form.Group controlId="formCity">
+                    <Form.Label>Ciudad</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="location.city"
+                      value={userData.location?.city || ''}
+                      onChange={handleChange}
+                      placeholder="Ingrese su ciudad"
+                      className="custom-input"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+  
+              <Row className="mb-3">
+                <Col md={6}>
+                  <Form.Group controlId="formCountry">
+                    <Form.Label>País</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="location.country"
+                      value={userData.location?.country || ''}
+                      onChange={handleChange}
+                      placeholder="Ingrese su país"
+                      className="custom-input"
+                    />
+                  </Form.Group>
+                </Col>
+  
+                <Col md={6}>
+                  <Form.Group controlId="formDescription">
+                    <Form.Label>Descripción</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      name="description"
+                      value={userData.description || ''}
+                      onChange={handleChange}
+                      placeholder="Escriba una breve descripción"
+                      rows={3}
+                      className="custom-textarea"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+  
+              <Row className="mb-3">
+                <Col md={6}>
+                  <Form.Group controlId="formImage">
+                    <Form.Label>Imagen de Perfil</Form.Label>
+                    <Form.Control
+                      type="file"
+                      name="image"
+                      onChange={handleFileUpload}
+                      disabled={isUploading}
+                      className="custom-input"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+  
+              {isUploading && <Alert variant="info">... Subiendo imagen</Alert>}
+              {imageUrl && (
+                <div className="mb-3 text-center">
+                  <img src={imageUrl} alt="Imagen de perfil" width={150} />
+                </div>
+              )}
+  
+              <div className="text-center">
+                <Button variant="primary" type="submit" className="mt-3">
+                  💼 Actualizar Perfil
+                </Button>
+              </div>
+            </Form>
+          </Card.Body>
+        </Card>
+      </Container>
   );
 }
 

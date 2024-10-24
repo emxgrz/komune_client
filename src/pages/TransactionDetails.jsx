@@ -38,52 +38,67 @@ function TransactionDetails() {
 
   return (
     <Container className="mt-5">
-      <h2 className="text-center mb-4">Detalles de la Transacción</h2>
       {transaction ? (
-        <Card>
+        <Card className="review-card">
           <Card.Body>
             <Card.Title>
-              <h3>Trabajo: {transaction.work.title}</h3>
+              <h3>Trabajo: {transaction.work.title} 🎨</h3>
             </Card.Title>
-
-            <Card.Subtitle className="mb-2 text-muted">
-              Profesional:{" "}
-              <Link
-                to={`/profiles/${transaction.professional._id}`}
-                style={{ textDecoration: "none", color: "#007bff" }}
-              >
-                {transaction.professional.username}
-              </Link>
-            </Card.Subtitle>
-
             <Card.Text>
               <strong>Descripción del trabajo:</strong> {transaction.work.description}
             </Card.Text>
 
-            <Card.Subtitle className="mt-3 mb-2 text-muted">
-              Cliente:{" "}
-              <Link
-                to={`/profiles/${transaction.client._id}`}
-                style={{ textDecoration: "none", color: "#007bff" }}
-              >
-                {transaction.client.username}
-              </Link>
-            </Card.Subtitle>
+            <hr className="my-4" />
 
-            <Card.Text>
-              <strong>Título:</strong> {transaction.title}
-            </Card.Text>
-            <Card.Text>
-              <strong>Descripción:</strong> {transaction.description}
-            </Card.Text>
-            <Card.Text>
-              <strong>Estado:</strong> {transaction.status}
-            </Card.Text>
+            <div className="d-flex justify-content-between align-items-center">
+              <div>
+                <h4>👨‍💼 Detalles del Profesional</h4>
+                <Card.Subtitle className="mb-2 text-muted">
+                  Profesional:{" "}
+                  <Link
+                    to={`/profiles/${transaction.professional._id}`}
+                    style={{ textDecoration: "none", color: "#007bff" }}
+                  >
+                    {transaction.professional.username}
+                  </Link>
+                </Card.Subtitle>
+              </div>
+              <div>
+                <h4>👤 Detalles del Cliente</h4>
+                <Card.Subtitle className="mb-2 text-muted">
+                  Cliente:{" "}
+                  <Link
+                    to={`/profiles/${transaction.client._id}`}
+                    style={{ textDecoration: "none", color: "#007bff" }}
+                  >
+                    {transaction.client.username}
+                  </Link>
+                </Card.Subtitle>
+              </div>
+            </div>
+
+            <Card className="mt-4 transaction-card text-center">
+              <Card.Body>
+                <Card.Title className="mb-3"><strong>Detalles de la Transacción</strong></Card.Title>
+                <div className="transaction-details">
+                  <span className="transaction-label"><strong>Título:</strong></span>
+                  <span className="transaction-value">{transaction.title}</span>
+                </div>
+                <div className="transaction-details">
+                  <span className="transaction-label"><strong>Descripción:</strong></span>
+                  <span className="transaction-value">{transaction.description}</span>
+                </div>
+                <div className="transaction-details">
+                  <span className="transaction-label"><strong>Estado:</strong></span>
+                  <span className="transaction-value">{transaction.status}</span>
+                </div>
+              </Card.Body>
+            </Card>
 
             {/* Mostrar el botón solo si el estado es "completado" */}
             {transaction.status === "completado" && (
               <Link to={`/review-form/${transaction._id}/${transaction.professional._id}`}>
-                <Button variant="primary">Dejar una Reseña</Button>
+                <Button variant="primary" className="mt-3">Dejar una Reseña 📝</Button>
               </Link>
             )}
           </Card.Body>

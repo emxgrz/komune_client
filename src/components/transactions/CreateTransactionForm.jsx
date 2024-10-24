@@ -23,6 +23,22 @@ function CreateTransactionForm() {
     setLoading(true);
     setError(null);
 
+    
+      if (!title.trim()) {
+        setError("El título es obligatorio.");
+        setLoading(false);
+        return;
+      }
+    
+      if (!description.trim()) {
+        setError("La descripción es obligatoria.");
+        setLoading(false);
+        return;
+      }
+    
+    
+      
+
     try {
       const response = await service.post("/transaction", {
         work: workId,
@@ -33,6 +49,8 @@ function CreateTransactionForm() {
         status
       });
 
+ 
+
       navigate("/my-transactions");
     } catch (error) {
       setError(error.response?.data?.message || "Ocurrió un error");
@@ -41,14 +59,16 @@ function CreateTransactionForm() {
     }
   };
 
+
+
   return (
     <Container className="mt-5">
       <Card>
-        <Card.Header as="h5" className="text-center">Crear intercambio</Card.Header>
+        <Card.Header as="h5" className="text-center">Haz tu petición 📩</Card.Header>
         <Card.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formTitle" className="mb-3">
-              <Form.Label>Título</Form.Label>
+              <Form.Label>Título ✒️</Form.Label>
               <Form.Control
                 type="text"
                 value={title}
@@ -59,7 +79,7 @@ function CreateTransactionForm() {
             </Form.Group>
 
             <Form.Group controlId="formDescription" className="mb-3">
-              <Form.Label>Descripción</Form.Label>
+              <Form.Label>Descripción 📒</Form.Label>
               <Form.Control
                 as="textarea"
                 value={description}
@@ -71,22 +91,20 @@ function CreateTransactionForm() {
             </Form.Group>
 
             <Form.Group controlId="formStatus" className="mb-3">
-              <Form.Label>Estado</Form.Label>
+              <Form.Label>Estado 📂</Form.Label>
               <Form.Select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                required
               >
-                <option value="">Seleccione un estado</option>
-                <option value="en progreso...">Pendiente</option>
-                <option value="completado">Completado</option>
-                <option value="cancelado">Cancelado</option>
+                <option value="en progreso...">Pendiente ⏯️</option>
+                <option value="completado">Completado ✅</option>
+                <option value="cancelado">Cancelado ⭕</option>
               </Form.Select>
             </Form.Group>
 
             <div className="text-center">
               <Button variant="primary" type="submit">
-                Crear Transacción
+                Enviar ▶️
               </Button>
             </div>
           </Form>
