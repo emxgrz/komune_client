@@ -1,0 +1,18 @@
+.work-card {
+  transition: transform 0.3s; /* Efecto de animación */
+  border: 1px solid #dee2e6; /* Borde suave */
+  border-radius: 8px; /* Bordes redondeados */
+  overflow: hidden; /* Ocultar el desbordamiento */
+  height: 280px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.work-card:hover {
+  transform: scale(1.05); /* Ampliar un poco al pasar el mouse */
+}
+
+.work-card img {
+  height: 90px; /* Ajustar la altura de la imagen */
+  width: 90px;
+  object-fit: cover; /* Recortar la imagen si es necesario */
+}

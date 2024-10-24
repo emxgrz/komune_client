@@ -1,18 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom"; 
+import { Card } from 'react-bootstrap';
+
+import "../../styles/transactionCard.css"
+
 
 function TransactionCard({ id, title, description, client, status }) {
   return (
-    <div className="transaction-card" key={id}
-      style={{ cursor: 'pointer', border: '1px solid #ccc', padding: '10px', margin: '10px' }} 
-    >
-      <Link to={`/transaction/${id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-        <h3>Trabajo: {title}</h3>
-        <p>Descripción: {description}</p>
-        {/* <p>Cliente: {client}</p>
-        <p>Estado: {status}</p> */}
-      </Link>
-    </div>
+    <Card className="transaction-card h-100 shadow-sm">
+      <Card.Body>
+        <Link to={`/transaction/${id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Card.Title as="h3">Trabajo: {title}</Card.Title>
+          <Card.Text>
+            <strong>Descripción:</strong> {description}
+          </Card.Text>
+        </Link>
+      </Card.Body>
+    </Card>
   );
 }
 

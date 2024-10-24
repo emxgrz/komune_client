@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import service from "../../services/config"; 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context"; 
 
 function CreateReviewForm() {
@@ -12,41 +12,52 @@ function CreateReviewForm() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const {transactionId} = useParams()
+  const {userId} = useParams()
+
   const handleSubmit = async (e) => {
     e.preventDefault(); 
-    if (!transaction || !loggedUserId || !rating) {
+    if (!transactionId || !loggedUserId || !rating) {
       setError("Los campos transacción, revisor (automáticamente) y calificación son requeridos.");
       return;
     }
-
+  
+    console.log("Datos a enviar:", {
+      transaction: transactionId,
+      reviewer: loggedUserId,
+      reviewed: userId,
+      rating,
+      comment,
+    });
+    
     try {
-      const response = await service.post("/reviews", {
-        transaction,
+      const response = await service.post("/review", {
+        transaction: transactionId,
         reviewer: loggedUserId, 
-        reviewed,
+        reviewed: userId,
         rating,
         comment,
       });
-
-      setTransaction("");
-      setReviewed("");
+  
+      console.log("Respuesta del servidor:", response.data); // Log para verificar la respuesta
+  
       setRating("");
       setComment("");
-
-      navigate("/my-page/:userId");
-
+      navigate(`/my-page/${loggedUserId}`); 
+  
     } catch (error) {
       setError("Error al crear la reseña. Intenta de nuevo.");
-      console.error(error);
+      console.error(error.response ? error.response.data : error.message);
     }
   };
+  
 
   return (
     <div className="create-review-form">
       <h2>Crear Reseña</h2>
 
       <form onSubmit={handleSubmit}>
-        <div>
+        {/* <div>
           <label>Transacción (ID)</label>
           <input
             type="text"
@@ -55,18 +66,18 @@ function CreateReviewForm() {
             placeholder="Ingresa el ID de la transacción"
             required
           />
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <label>Cliente</label>
           <input
             type="text"
             value={loggedUserId} 
             readOnly 
           />
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <label>Profesional</label>
           <input
             type="text"
@@ -74,7 +85,7 @@ function CreateReviewForm() {
             onChange={(e) => setReviewed(e.target.value)}
             placeholder="Ingresa el ID de la persona a la que vas a ponerle una review"
           />
-        </div>
+        </div> */}
 
         <div>
           <label>Calificación</label>

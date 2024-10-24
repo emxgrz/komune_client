@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 import WorkCard from "./work/WorkCard";
 import service from "../services/config";
+import { Container, Form, Button, Alert } from 'react-bootstrap';
+
+import "../styles/searchBarStyle.css"
+
 
 function WorkSearch() {
   const [searchedWork, setSearchedWork] = useState(""); 
@@ -51,29 +55,43 @@ function WorkSearch() {
   }, []);
 
   return (
-    <div>
-      <input
-        className="search-bar"
-        type="text"
-        placeholder="Buscar servicios..."
-        value={searchedWork}
-        onChange={(e) => setSearchedWork(e.target.value)}
+    <Container className="mt-5 text-center">
+      <h1 className="mb-4">Buscar Servicios</h1>
+      <Form>
+        <Form.Group controlId="search" className="mb-3">
+          <Form.Control
+            className="search-bar"
+            type="text"
+            placeholder="Buscar servicios..."
+            value={searchedWork}
+            onChange={(e) => setSearchedWork(e.target.value)}
+            style={{
+              padding: "10px",
+              margin: "0 auto", // Centramos la barra
+              width: "50%",
+              border: "2px solid #007bff", // Color de borde azul
+              borderRadius: "5px",
+            }}
+          />
+        </Form.Group>
+      </Form>
+      <div
         style={{
-          padding: "10px",
-          marginBottom: "50px",
+          padding: "15px",
+          margin: "0 auto",
           width: "50%",
-          border: "2px solid black",
+          border: "2px solid #007bff", // Recuadro azul
           borderRadius: "5px",
+          backgroundColor: "#f8f9fa", // Fondo gris claro
+          marginBottom: "30px",
         }}
-      />
-
-      <p>
-        Escribe el nombre del servicio que estás buscando (mínimo 3 letras)
-      </p>
+      >
+        <Alert variant="warning">Escribe el nombre del servicio que estás buscando (mínimo 3 letras).</Alert>
+      </div>
 
       {loading ? (
         <div>
-          <p>Estoy cargando...</p>
+          <p>Cargando...</p>
         </div>
       ) : (
         <div>
@@ -84,26 +102,28 @@ function WorkSearch() {
                 id={work._id}
                 title={work.title}
                 description={work.description || "Descripción no disponible."}
-                professional={work.professional.username} 
+                professional={work.professional.username}
+                image={work.professional.image} // Asegúrate de pasar la imagen si la necesitas
               />
             ))
           ) : (
             searchOn && (
-              <>
-                <p>¡Vaya! No se encontraron resultados.</p>
+              <div>
+                <Alert variant="warning">¡Vaya! No se encontraron resultados.</Alert>
                 <p>¿Seguro que estás buscando un servicio correcto?</p>
-                <button
+                <Button
                   id="create-button"
-                  onClick={() => navigate("/miPgDeCrearWorks")} //redirigir a la pg de crear usuario
+                  onClick={() => navigate("/miPgDeCrearWorks")} // Redirigir a la pg de crear usuario
+                  variant="primary"
                 >
                   Crear Servicio
-                </button>
-              </>
+                </Button>
+              </div>
             )
           )}
         </div>
       )}
-    </div>
+    </Container>
   );
 }
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import service from "../../services/config"; 
 import TransactionCard from "./TransactionCard"; 
+import { Container, Row, Col } from 'react-bootstrap';
+
 
 function TransactionList() {
   const [transactions, setTransactions] = useState([]);
@@ -33,23 +35,26 @@ function TransactionList() {
   }
 
   return (
-    <div className="transaction-list">
-      <h2>Lista de Transacciones</h2>
+    <Container className="mt-5">
+      <h2 className="text-center mb-4">Lista de Transacciones</h2>
       {transactions.length === 0 ? (
         <p>No hay transacciones disponibles.</p>
       ) : (
-        transactions.map((transaction) => (
-          <TransactionCard
-          key={transaction._id}
-          id={transaction._id}
-          title={transaction ? transaction.title : "Título no disponible"} 
-          description={transaction ? transaction.description : "Profesional no disponible"} 
-          client={transaction.client ? transaction.client.username : "Cliente no disponible"} 
-          status={transaction.status}
-        />
-        ))
+        <Row>
+          {transactions.map((transaction) => (
+            <Col md={6} key={transaction._id} className="mb-4">
+              <TransactionCard
+                id={transaction._id}
+                title={transaction.title || "Título no disponible"}
+                description={transaction.description || "Descripción no disponible"}
+                client={transaction.client ? transaction.client.username : "Cliente no disponible"}
+                status={transaction.status}
+              />
+            </Col>
+          ))}
+        </Row>
       )}
-    </div>
+    </Container>
   );
 }
 

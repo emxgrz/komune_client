@@ -1,0 +1,25 @@
+
+
+.card {
+  background-color: white; /* Fondo blanco para la tarjeta */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Sombra para la tarjeta */
+}
+
+.card h1 {
+  color: #007bff; /* Color azul para el título */
+}
+
+.card .btn-primary {
+  background-color: #007bff; /* Color del botón */
+  border: none; /* Sin borde */
+}
+
+.card .btn-primary:hover {
+  background-color: #0056b3; /* Color del botón al hacer hover */
+}
+
+input::placeholder {
+  font-size: 0.9rem; /* Ajusta el tamaño según tu preferencia */
+  color: #6c757d; /* Color suave para el placeholder */
+}

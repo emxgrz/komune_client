@@ -26,6 +26,7 @@ import TransactionPage from "./pages/TransactionPage";
 import CreateTransactionForm from "./components/transactions/CreateTransactionForm";
 import TransactionDetails from "./pages/TransactionDetails";
 
+import WorkList from "./components/work/WorkList";
 
 function App() {
 
@@ -56,7 +57,7 @@ function App() {
         <Route path="/work-form" element={<Private> <CreateWorkForm /> </Private>} />
 
         <Route path="/review/:id" element={<Private> <ReviewDetails /> </Private>} />
-        <Route path="/review-form" element={<Private> <CreateReviewForm /> </Private>} />
+        <Route path="/review-form/:transactionId/:userId" element={<Private> <CreateReviewForm /> </Private>} />
 
         <Route path="/my-transactions" element={<Private> <TransactionPage /> </Private>} />
         <Route path="/transaction/:id" element={<Private> <TransactionDetails /> </Private>} />

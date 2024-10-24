@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import service from '../services/config'; 
 import { AuthContext } from '../context/auth.context';
+import { Form, Button, Container, Card, Alert, Row, Col } from 'react-bootstrap';
+import "../styles/updateProfileStyle.css"
+
 
 function UpdateProfile() {
   const { isLoggedIn, loggedUserId } = useContext(AuthContext); 
@@ -109,98 +112,169 @@ const [isUploading, setIsUploading] = useState(false);
   
 
   return (
-    <div>
-  <h2>Actualizar Perfil</h2>
-  {error && <p className="error">{error}</p>}
-  <form onSubmit={handleSubmit}>
-    <div>
-      <label>Username:</label>
-      <input
-        type="text"
-        name="username"
-        value={userData.username || ''} 
-        onChange={handleChange}
-        required
-      />
-    </div>
-    <div>
-      <label>Email:</label>
-      <input
-        type="email"
-        name="email"
-        value={userData.email || ''} 
-        onChange={handleChange}
-        required
-      />
-    </div>
-    <div>
-      <label>Nombre:</label>
-      <input
-        type="text"
-        name="firstName"
-        value={userData.firstName || ''} 
-        onChange={handleChange}
-      />
-    </div>
-    <div>
-      <label>Apellido:</label>
-      <input
-        type="text"
-        name="lastName"
-        value={userData.lastName || ''} 
-        onChange={handleChange}
-      />
-    </div>
-    <div>
-      <label>Fecha de Nacimiento:</label>
-      <input
-        type="date"
-        name="dateOfBirth"
-        value={userData.dateOfBirth ? userData.dateOfBirth.substring(0, 10) : ''} // formato de la fecha
-        onChange={handleChange}
-      />
-    </div>
-    <div>
-      <label>Ciudad:</label>
-      <input
-        type="text"
-        name="location.city"
-        value={userData.location?.city || ''} 
-        onChange={handleChange}
-      />
-    </div>
-    <div>
-      <label>País:</label>
-      <input
-        type="text"
-        name="location.country"
-        value={userData.location?.country || ''} 
-        onChange={handleChange}
-      />
-    </div>
-    <div>
-      <label>Descripción:</label>
-      <textarea
-        name="description"
-        value={userData.description || ''} 
-        onChange={handleChange}
-      />
-    </div>
-    <div>
-      <label>Imagen:</label>
-      <input
-            type="file" // Cambiar a tipo file para cargar imágenes
-            name="image" // Aceptar solo archivos de imagen
-            onChange={handleFileUpload} // Manejar la carga del archivo
-            disabled={isUploading} // Deshabilitar durante la carga
-          />
-    </div>
-    {isUploading ? <h3>... uploading image</h3> : null}
-    {imageUrl ? (<div><img src={imageUrl} alt="img" width={200} /></div>) : null}
 
-    <button type="submit">Actualizar Perfil</button>
-  </form>
-</div>
+    <Container className="mt-5">
+    <Card>
+      <Card.Header as="h5" className="text-center">Actualizar Perfil</Card.Header>
+      <Card.Body>
+        {error && <Alert variant="danger">{error}</Alert>}
+
+        <Form onSubmit={handleSubmit}>
+          <Row className="mb-3">
+            <Col md={6}>
+              {/* Username */}
+              <Form.Group controlId="formUsername">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="username"
+                  value={userData.username || ''}
+                  onChange={handleChange}
+                  placeholder="Ingrese su nombre de usuario"
+                  required
+                />
+              </Form.Group>
+            </Col>
+
+            <Col md={6}>
+              {/* Email */}
+              <Form.Group controlId="formEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={userData.email || ''}
+                  onChange={handleChange}
+                  placeholder="Ingrese su correo electrónico"
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row className="mb-3">
+            <Col md={6}>
+              {/* First Name */}
+              <Form.Group controlId="formFirstName">
+                <Form.Label>Nombre</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="firstName"
+                  value={userData.firstName || ''}
+                  onChange={handleChange}
+                  placeholder="Ingrese su nombre"
+                />
+              </Form.Group>
+            </Col>
+
+            <Col md={6}>
+              {/* Last Name */}
+              <Form.Group controlId="formLastName">
+                <Form.Label>Apellido</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="lastName"
+                  value={userData.lastName || ''}
+                  onChange={handleChange}
+                  placeholder="Ingrese su apellido"
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row className="mb-3">
+            <Col md={6}>
+              {/* Date of Birth */}
+              <Form.Group controlId="formDateOfBirth">
+                <Form.Label>Fecha de Nacimiento</Form.Label>
+                <Form.Control
+                  type="date"
+                  name="dateOfBirth"
+                  value={userData.dateOfBirth ? userData.dateOfBirth.substring(0, 10) : ''}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+
+            <Col md={6}>
+              {/* City */}
+              <Form.Group controlId="formCity">
+                <Form.Label>Ciudad</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="location.city"
+                  value={userData.location?.city || ''}
+                  onChange={handleChange}
+                  placeholder="Ingrese su ciudad"
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row className="mb-3">
+            <Col md={6}>
+              {/* Country */}
+              <Form.Group controlId="formCountry">
+                <Form.Label>País</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="location.country"
+                  value={userData.location?.country || ''}
+                  onChange={handleChange}
+                  placeholder="Ingrese su país"
+                />
+              </Form.Group>
+            </Col>
+
+            <Col md={6}>
+              {/* Description */}
+              <Form.Group controlId="formDescription">
+                <Form.Label>Descripción</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  name="description"
+                  value={userData.description || ''}
+                  onChange={handleChange}
+                  placeholder="Escriba una breve descripción"
+                  rows={3}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row className="mb-3">
+            <Col md={6}>
+              {/* Image Upload */}
+              <Form.Group controlId="formImage">
+                <Form.Label>Imagen de Perfil</Form.Label>
+                <Form.Control
+                  type="file"
+                  name="image"
+                  onChange={handleFileUpload}
+                  disabled={isUploading}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          {/* Uploading Status */}
+          {isUploading && <Alert variant="info">... Subiendo imagen</Alert>}
+          {imageUrl && (
+            <div className="mb-3 text-center">
+              <img src={imageUrl} alt="Imagen de perfil" width={150} />
+            </div>
+          )}
+
+          {/* Submit Button */}
+          <div className="text-center">
+            <Button variant="primary" type="submit">
+              Actualizar Perfil
+            </Button>
+          </div>
+        </Form>
+      </Card.Body>
+    </Card>
+  </Container>
   );
 }
 

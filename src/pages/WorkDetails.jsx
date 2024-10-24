@@ -4,6 +4,9 @@ import service from "../services/config.js";
 import { AuthContext } from "../context/auth.context.jsx";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Container, Card, Button, Form } from 'react-bootstrap';
+import "../styles/workDetailsStyle.css"
+
 
 function WorkDetails() {
   const { id } = useParams();
@@ -95,43 +98,36 @@ function WorkDetails() {
   }
 
   return (
-    <div>
-      <h2>Detalles del Trabajo</h2>
+    <Container className="mt-5">
+      <h2 className="text-center mb-4">Detalles del Trabajo</h2>
       {work ? (
-        <div>
+        <Card className="p-4 shadow-sm">
           {isEditing ? (
-            <form onSubmit={handleEdit}>
-              <div>
-                <label htmlFor="title">Título:</label>
-                <input
+            <Form onSubmit={handleEdit}>
+              <Form.Group controlId="title">
+                <Form.Label>Título:</Form.Label>
+                <Form.Control
                   type="text"
-                  id="title"
-                  name="title"
                   value={formData.title}
                   onChange={handleChange}
                   required
                 />
-              </div>
+              </Form.Group>
 
-              <div>
-                <label htmlFor="description">Descripción:</label>
-                <textarea
-                  id="description"
-                  name="description"
+              <Form.Group controlId="description" className="mt-3">
+                <Form.Label>Descripción:</Form.Label>
+                <Form.Control
+                  as="textarea"
                   value={formData.description}
                   onChange={handleChange}
                   required
                 />
-              </div>
+              </Form.Group>
 
-              <div>
-                <label htmlFor="skills">
-                  Habilidades (separadas por comas):
-                </label>
-                <input
+              <Form.Group controlId="skills" className="mt-3">
+                <Form.Label>Habilidades (separadas por comas):</Form.Label>
+                <Form.Control
                   type="text"
-                  id="skills"
-                  name="skills"
                   value={formData.skills.join(", ")}
                   onChange={(e) =>
                     setFormData((prev) => ({
@@ -142,40 +138,43 @@ function WorkDetails() {
                     }))
                   }
                 />
-              </div>
+              </Form.Group>
 
-              <button type="submit">Guardar Cambios</button>
-              <button type="button" onClick={() => setIsEditing(false)}>
-                Cancelar
-              </button>
-            </form>
+              <div className="mt-4">
+                <Button variant="primary" type="submit">
+                  Guardar Cambios
+                </Button>
+                <Button variant="secondary" className="ml-2" onClick={() => setIsEditing(false)}>
+                  Cancelar
+                </Button>
+              </div>
+            </Form>
           ) : (
             <div>
               <h3>{work.title}</h3>
               <p>{work.description}</p>
               <p>
-                Habilidades:{" "}
+                <strong>Habilidades:</strong>{" "}
                 {work.skills.length > 0 ? work.skills.join(", ") : "Ninguna"}
               </p>
-              <p>Profesional: {work.professional.username}</p>
+              <p><strong>Profesional:</strong> {work.professional.username}</p>
               <Link to={`/transaction-form/${work.professional._id}/${work._id}`}>
-                <button>Interested? Click here!</button>
-                {/* para crear una nueva transacción si están interesados en el anuncio del servicio */}
+                <Button variant="primary">¡Interesado? Haz clic aquí!</Button>
               </Link>
 
               {loggedUserId === work.professional._id && (
-                <div>
-                  <button onClick={() => setIsEditing(true)}>Editar</button>
-                  <button onClick={handleDelete}>Eliminar</button>
+                <div className="mt-3">
+                  <Button variant="warning" className="me-2" onClick={() => setIsEditing(true)}>Editar</Button>
+                  <Button variant="danger" className="ml-2" onClick={handleDelete}>Eliminar</Button>
                 </div>
               )}
             </div>
           )}
-        </div>
+        </Card>
       ) : (
         <p>No se encontraron detalles del trabajo.</p>
       )}
-    </div>
+    </Container>
   );
 }
 

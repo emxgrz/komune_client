@@ -1,0 +1,7 @@
+.transaction-card {
+  transition: transform 0.2s; /* Suaviza la animación al hacer hover */
+}
+
+.transaction-card:hover {
+  transform: scale(1.05); /* Escala la tarjeta al hacer hover */
+}

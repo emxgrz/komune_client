@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import service from "../services/config.js";
 import { AuthContext } from "../context/auth.context.jsx";
 import { Container, Card, ListGroup, Spinner } from "react-bootstrap";
+import "../styles/userDetails.css"
 
 function UserDetails() {
   const [user, setUser] = useState(null);
@@ -45,14 +46,16 @@ function UserDetails() {
     <Container className="mt-5">
       {user && (
         <Card>
-          <Card.Header as="h5">Detalles del Usuario</Card.Header>
+          <Card.Header as="h5" className="text-center">
+            Detalles del Usuario
+          </Card.Header>
           <ListGroup variant="flush">
-          {user.image && (
-              <ListGroup.Item>
+            {user.image && (
+              <ListGroup.Item className="text-center">
                 <img 
                   src={user.image} 
                   alt={`${user.username}'s avatar`} 
-                  style={{ width: '100px', height: '100px', borderRadius: '50%', marginLeft: '10px' }} 
+                  style={{ width: '100px', height: '100px', borderRadius: '50%', margin: '10px auto' }} 
                 />
               </ListGroup.Item>
             )}
@@ -97,7 +100,6 @@ function UserDetails() {
                 <strong>Descripción:</strong> {user.description}
               </ListGroup.Item>
             )}
-            
           </ListGroup>
         </Card>
       )}

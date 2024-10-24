@@ -31,20 +31,27 @@ function NavbarNew() {
 
   return (
     <Navbar bg="light" expand="lg" className="shadow-sm">
-      <Container>
+      <Container className="d-flex justify-content-between align-items-center">
+        {!isLoggedIn && <Navbar.Brand as={Link} to="/" className="fw-bold">
+          komune
+        </Navbar.Brand>}
+
+        {isLoggedIn && <Navbar.Brand as={Link} to="/home" className="fw-bold">
+          komune
+        </Navbar.Brand>}
+        
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-          {!isLoggedIn && <Nav.Link as={Link} to="/">LOGO</Nav.Link>}
-            {!isLoggedIn && <Nav.Link as={Link} to="/our-mission">Our mission</Nav.Link>}
-            {!isLoggedIn && <Nav.Link as={Link} to="/signup">Registro</Nav.Link>}
-            {!isLoggedIn && <Nav.Link as={Link} to="/login">Acceso</Nav.Link>}
+          <Nav className="ms-auto"> {/* Alinear elementos a la derecha */}
+            {!isLoggedIn && <Nav.Link as={Link} to="/our-mission" className="nav-button">Our Mission</Nav.Link>}
+            {!isLoggedIn && <Nav.Link as={Link} to="/signup" className="nav-button">Registro</Nav.Link>}
+            {!isLoggedIn && <Nav.Link as={Link} to="/login" className="nav-button">Acceso</Nav.Link>}
             
-            {isLoggedIn && <Nav.Link as={Link} to={`/home`}>Home</Nav.Link>}
-            {isLoggedIn && <Nav.Link as={Link} to={`/search`}>Search</Nav.Link>}
-            {isLoggedIn && <Nav.Link as={Link} to={`/my-transactions`}>Transactions</Nav.Link>}
-            {isLoggedIn && <Nav.Link as={Link} to={`/my-page/${loggedUserId}`}>Mi perfil</Nav.Link>}
-            {isLoggedIn && <Nav.Link onClick={handleLogout}>Cerrar sesión</Nav.Link>}
+  
+            {isLoggedIn && <Nav.Link as={Link} to={`/search`} className="nav-button">Search</Nav.Link>}
+            {isLoggedIn && <Nav.Link as={Link} to={`/my-transactions`} className="nav-button">Transactions</Nav.Link>}
+            {isLoggedIn && <Nav.Link as={Link} to={`/my-page/${loggedUserId}`} className="nav-button">Mi Perfil</Nav.Link>}
+            {isLoggedIn && <Nav.Link onClick={handleLogout} className="nav-button">Cerrar Sesión</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Container>

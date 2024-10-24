@@ -19,7 +19,7 @@ function ReviewDetails() {
   useEffect(() => {
     const fetchReview = async () => {
       try {
-        const response = await service.get(`/reviews/${id}`);
+        const response = await service.get(`/review/${id}`);
         setReview(response.data);
         setFormData({
           rating: response.data.rating,

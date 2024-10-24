@@ -4,6 +4,8 @@ import WorkList from '../components/work/WorkList'
 import ReviewList from '../components/review/ReviewList'
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
+import { Container, Button } from 'react-bootstrap';
+
 
 
 
@@ -18,15 +20,19 @@ export default function ProfilePage() {
     navigate(`/edit-page/${userId}`);
   };
   return (
-    <div>
+    <Container className="mt-5">
       <UserDetails />
       {loggedUserId === userId && (
-        <button onClick={handleEditClick} style={{ marginTop: '20px' }}>
+        <Button
+          variant="primary"
+          onClick={handleEditClick}
+          style={{ marginTop: '20px' }}
+        >
           Editar Perfil
-        </button>
+        </Button>
       )}
-      <WorkList />
+      <WorkList userId={userId} />
       <ReviewList />
-    </div>
+    </Container>
   )
 }

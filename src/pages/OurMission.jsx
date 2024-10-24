@@ -1,21 +1,35 @@
 import React from 'react';
-import { Container, Card, ListGroup } from 'react-bootstrap';
-
+import { Container, Card, ListGroup, Button, Carousel } from 'react-bootstrap';
+import "../styles/missionStyle.css"
 const OurMission = () => {
   return (
     <Container className="mt-5">
-      <h1 className="mb-4 text-center">OUR MISSION</h1>
+      <h1 className="mb-4 text-center mission-title">OUR MISSION</h1>
       
-      <Card className="mb-4">
-        <Card.Body>
-          <Card.Text>
-            En un mundo cada vez más conectado, creemos que el verdadero valor de nuestras habilidades y talentos no debería estar limitado por la capacidad de pagar. Nuestra misión es crear un espacio donde los profesionales puedan ofrecer y recibir servicios de manera equitativa, fomentando una comunidad de colaboración y apoyo mutuo.
-          </Card.Text>
-        </Card.Body>
-      </Card>
+      {/* Carousel para textos en movimiento */}
+      <Carousel className="mb-4">
+        <Carousel.Item>
+          <Card className="shadow-sm mission-card">
+            <Card.Body>
+              <Card.Text>
+                En un mundo cada vez más conectado, creemos que el verdadero valor de nuestras habilidades y talentos no debería estar limitado por la capacidad de pagar.
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Carousel.Item>
+        <Carousel.Item>
+          <Card className="shadow-sm mission-card">
+            <Card.Body>
+              <Card.Text>
+                Nuestra misión es crear un espacio donde los profesionales puedan ofrecer y recibir servicios de manera equitativa, fomentando una comunidad de colaboración y apoyo mutuo.
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Carousel.Item>
+      </Carousel>
 
-      <h2>¿Por qué creamos esta plataforma?</h2>
-      <Card className="mb-4">
+      <h2 className="mt-4">¿Por qué creamos esta plataforma?</h2>
+      <Card className="mb-4 shadow-sm mission-card">
         <Card.Body>
           <Card.Text>
             La idea de esta plataforma nació de la necesidad de conectar a profesionales de diversas disciplinas sin las barreras económicas que a menudo impiden el acceso a servicios de calidad. Queremos que cada individuo, independientemente de su situación financiera, tenga la oportunidad de:
@@ -34,8 +48,8 @@ const OurMission = () => {
         </Card.Body>
       </Card>
 
-      <h2>Nuestros valores</h2>
-      <Card className="mb-4">
+      <h2 className="mt-4">Nuestros valores</h2>
+      <Card className="mb-4 shadow-sm mission-card">
         <Card.Body>
           <ListGroup>
             <ListGroup.Item>
@@ -51,8 +65,8 @@ const OurMission = () => {
         </Card.Body>
       </Card>
 
-      <h2>Únete a nosotros</h2>
-      <Card className="mb-4">
+      <h2 className="mt-4">Únete a nosotros</h2>
+      <Card className="mb-4 shadow-sm mission-card">
         <Card.Body>
           <Card.Text>
             Te invitamos a ser parte de esta misión. Ya seas un diseñador gráfico, un desarrollador web, un coach personal o un experto en marketing, aquí tienes la oportunidad de hacer crecer tu red, aprender de otros y, sobre todo, intercambiar tus servicios de manera justa y equitativa.
@@ -60,10 +74,10 @@ const OurMission = () => {
           <Card.Text>
             ¡Juntos podemos construir una comunidad donde el talento y la colaboración sean la norma!
           </Card.Text>
+          <Button variant="primary" href="/signup">¡Únete Ahora!</Button> {/* Botón de llamada a la acción */}
         </Card.Body>
       </Card>
     </Container>
   );
 };
-
 export default OurMission;

@@ -1,0 +1,8 @@
+.card {
+  border: 1px solid #007bff; /* Color de borde */
+}
+
+.card-header {
+  background-color: #f8f9fa; /* Color de fondo claro */
+  font-weight: bold;
+}

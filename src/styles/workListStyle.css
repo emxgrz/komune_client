@@ -1,0 +1,18 @@
+.work-list {
+  padding: 20px;
+  background-color: #f8f9fa; /* Un fondo ligero para contrastar */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.work-list h2 {
+  color: #343a40; /* Color del título */
+}
+
+.work-list .card {
+  transition: transform 0.3s; /* Animación al pasar el mouse */
+}
+
+.work-list .card:hover {
+  transform: translateY(-5px); /* Elevación al pasar el mouse */
+}

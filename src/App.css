@@ -1,1 +1,42 @@
+.navbar {
+  background-color: #f8f9fa; /* Fondo claro para la navbar */
+}
+
+.nav-link {
+  color: #007bff; /* Color de los enlaces */
+  font-weight: bold ;
+  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
+  border: 2px solid rgb(74, 32, 172); /* Borde transparente por defecto */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 8px 12px; /* Espaciado interno para el botón */
+  margin-right: 3px;
+}
+
+.nav-link:hover {
+  background-color: #0056b3; /* Color de fondo al pasar el ratón */
+  color: white; /* Color del texto al pasar el ratón */
+}
+
+.navbar-brand {
+  font-size: 1.5rem; /* Tamaño de fuente del logo */
+  color: #007bff;
+}
+
+.navbar-brand:hover {
+  color: #0056b3; /* Color del logo al pasar el ratón */
+}
+
+.card-container {
+  background-color: white; /* Fondo blanco para la card */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+  padding: 20px; /* Espaciado interno */
+  max-width: 1000px; /* Ancho máximo para la card */
+  width: 100%; /* Aseguramos que use el 100% hasta el ancho máximo */
+  margin: 20px; /* Margen externo */
+}
+
+body {
+  background-color: #f4f4f4; /* Fondo general más claro para todo el cuerpo
+}
 

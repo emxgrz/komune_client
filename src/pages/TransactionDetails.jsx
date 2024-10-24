@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import service from "../services/config.js";
 
 function TransactionDetails() {
@@ -39,24 +39,40 @@ function TransactionDetails() {
       {transaction ? (
         <div>
           <div>
-            <p>Profesional: {transaction.professional.username}</p>
+            <p>
+              Profesional:{" "}
+              <Link
+                to={`/profiles/${transaction.professional._id}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                {transaction.professional.username}
+              </Link>
+            </p>
+
             <h3>Trabajo: {transaction.work.title}</h3>
             <p>Descripción: {transaction.work.description}</p>
           </div>
 
           <div>
             <p>
-              Cliente:
+              Cliente:{" "}
               <Link
-                to={`/profile/${transaction.client._id}`}
+                to={`/profiles/${transaction.client._id}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 {transaction.client.username}
               </Link>
-            </p>{" "}
+            </p>
             <p>Título: {transaction.title}</p>
             <p>Descripción: {transaction.description}</p>
             <p>Estado: {transaction.status}</p>
+
+            {/* Mostrar el botón solo si el estado es "completado" */}
+            {transaction.status === "completado" && (
+               <Link to={`/review-form/${transaction._id}/${transaction.professional._id}`}>
+                <button>Dejar una Reseña</button>
+              </Link>
+            )}
           </div>
         </div>
       ) : (

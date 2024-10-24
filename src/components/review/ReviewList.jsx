@@ -11,7 +11,7 @@ function ReviewList() {
     const fetchReviews = async () => {
       setLoading(true);
       try {
-        const response = await service.get("/reviews"); 
+        const response = await service.get("/review"); 
         setReviews(response.data); 
       } catch (err) {
         setError("Error al cargar las reseñas");
