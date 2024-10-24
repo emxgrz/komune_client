@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import service from "../services/config.js";
+import { Container, Card, Button } from 'react-bootstrap';
+import "../styles/transactionDetailsStyle.css"
 
 function TransactionDetails() {
   const [transaction, setTransaction] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+
 
   useEffect(() => {
     const fetchTransaction = async () => {
@@ -34,51 +37,61 @@ function TransactionDetails() {
   }
 
   return (
-    <div>
-      <h2>Detalles de la Transacción</h2>
+    <Container className="mt-5">
+      <h2 className="text-center mb-4">Detalles de la Transacción</h2>
       {transaction ? (
-        <div>
-          <div>
-            <p>
+        <Card>
+          <Card.Body>
+            <Card.Title>
+              <h3>Trabajo: {transaction.work.title}</h3>
+            </Card.Title>
+
+            <Card.Subtitle className="mb-2 text-muted">
               Profesional:{" "}
               <Link
                 to={`/profiles/${transaction.professional._id}`}
-                style={{ textDecoration: "none", color: "inherit" }}
+                style={{ textDecoration: "none", color: "#007bff" }}
               >
                 {transaction.professional.username}
               </Link>
-            </p>
+            </Card.Subtitle>
 
-            <h3>Trabajo: {transaction.work.title}</h3>
-            <p>Descripción: {transaction.work.description}</p>
-          </div>
+            <Card.Text>
+              <strong>Descripción del trabajo:</strong> {transaction.work.description}
+            </Card.Text>
 
-          <div>
-            <p>
+            <Card.Subtitle className="mt-3 mb-2 text-muted">
               Cliente:{" "}
               <Link
                 to={`/profiles/${transaction.client._id}`}
-                style={{ textDecoration: "none", color: "inherit" }}
+                style={{ textDecoration: "none", color: "#007bff" }}
               >
                 {transaction.client.username}
               </Link>
-            </p>
-            <p>Título: {transaction.title}</p>
-            <p>Descripción: {transaction.description}</p>
-            <p>Estado: {transaction.status}</p>
+            </Card.Subtitle>
+
+            <Card.Text>
+              <strong>Título:</strong> {transaction.title}
+            </Card.Text>
+            <Card.Text>
+              <strong>Descripción:</strong> {transaction.description}
+            </Card.Text>
+            <Card.Text>
+              <strong>Estado:</strong> {transaction.status}
+            </Card.Text>
 
             {/* Mostrar el botón solo si el estado es "completado" */}
             {transaction.status === "completado" && (
-               <Link to={`/review-form/${transaction._id}/${transaction.professional._id}`}>
-                <button>Dejar una Reseña</button>
+              <Link to={`/review-form/${transaction._id}/${transaction.professional._id}`}>
+                <Button variant="primary">Dejar una Reseña</Button>
               </Link>
             )}
-          </div>
-        </div>
+          </Card.Body>
+        </Card>
       ) : (
         <p>No se encontraron detalles para esta transacción.</p>
       )}
-    </div>
+    </Container>
   );
 }
 

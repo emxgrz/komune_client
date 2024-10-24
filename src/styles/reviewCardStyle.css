@@ -1,0 +1,18 @@
+.review-card {
+  transition: transform 0.3s; 
+  border: 1px solid #dee2e6; 
+  border-radius: 8px;
+  overflow: hidden; 
+  height: 280px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.review-card:hover {
+  transform: scale(1.05); 
+}
+
+.review-card img {
+  height: 90px; 
+  width: 90px;
+  object-fit: cover; 
+}

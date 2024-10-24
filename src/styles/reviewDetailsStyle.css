@@ -1,0 +1,27 @@
+.review-card {
+  background-color: #f9f9f9;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 30px;
+  width: 80%;
+}
+
+.review-card h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.review-card h3 {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.review-card p {
+  margin-bottom: 15px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}

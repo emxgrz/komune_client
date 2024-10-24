@@ -3,6 +3,6 @@
 }
 
 .search-bar:focus {
-  border-color: #0056b3; /* Color de borde en el foco */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra para el foco */
+  border-color: #0056b3; 
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
 }

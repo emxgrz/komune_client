@@ -2,6 +2,9 @@ import { useState, useContext } from "react";
 import service from "../../services/config"; 
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context"; 
+import { Container, Form, Button } from 'react-bootstrap';
+import "../../styles/reviewFormStyle.css"
+
 
 function CreateReviewForm() {
   const { loggedUserId } = useContext(AuthContext); 
@@ -53,63 +56,42 @@ function CreateReviewForm() {
   
 
   return (
-    <div className="create-review-form">
-      <h2>Crear Reseña</h2>
-
-      <form onSubmit={handleSubmit}>
-        {/* <div>
-          <label>Transacción (ID)</label>
-          <input
-            type="text"
-            value={transaction}
-            onChange={(e) => setTransaction(e.target.value)}
-            placeholder="Ingresa el ID de la transacción"
-            required
-          />
-        </div> */}
-
-        {/* <div>
-          <label>Cliente</label>
-          <input
-            type="text"
-            value={loggedUserId} 
-            readOnly 
-          />
-        </div> */}
-
-        {/* <div>
-          <label>Profesional</label>
-          <input
-            type="text"
-            value={reviewed}
-            onChange={(e) => setReviewed(e.target.value)}
-            placeholder="Ingresa el ID de la persona a la que vas a ponerle una review"
-          />
-        </div> */}
-
-        <div>
-          <label>Calificación</label>
-          <input
+    <Container className="mt-5">
+      <h2 className="text-center mb-4">Crear Reseña</h2>
+      <Form onSubmit={handleSubmit} className="create-review-form">
+        <Form.Group controlId="formRating">
+          <Form.Label>Calificación</Form.Label>
+          <Form.Control
             type="number"
             value={rating}
             onChange={(e) => setRating(e.target.value)}
             placeholder="Ingresa la calificación (1-5)"
             required
+            min={1}
+            max={5}
+            className="custom-input" // Clase personalizada para el input
           />
-        </div>
+        </Form.Group>
 
-        <div>
-          <label>Comentario (opcional)</label>
-          <textarea
+        <Form.Group controlId="formComment">
+          <Form.Label>Comentario (opcional)</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder="Deja un comentario"
+            className="custom-textarea" // Clase personalizada para el textarea
           />
-        </div>
+        </Form.Group>
 
-        <button type="submit">Crear Reseña</button>
-      </form>
-    </div>
+        <div className="text-center">
+          <Button variant="primary" type="submit">
+            Crear Reseña
+          </Button>
+        </div>
+      </Form>
+    </Container>
   );
 }
 

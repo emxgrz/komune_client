@@ -1,28 +1,28 @@
 
 .mission-title {
-  color: #343a40; /* Color gris oscuro para el título principal */
-  font-weight: bold; /* Negrita para mayor impacto */
-  text-transform: uppercase; /* Transformar a mayúsculas para un estilo más moderno */
+  color: #343a40; 
+  font-weight: bold; 
+  text-transform: uppercase;
 }
 
 .mission-card {
-  background-color: white; /* Fondo blanco para las cards */
-  border: none; /* Sin borde para un diseño más limpio */
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* Sombra más profunda para dar dimensión */
-  transition: transform 0.2s; /* Efecto de transición suave para hover */
+  background-color: white;
+  border: none; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.2s; 
 }
 
 .mission-card:hover {
-  transform: translateY(-4px); /* Efecto de elevación al pasar el mouse */
+  transform: translateY(-4px); 
 }
 
 .mission-card h2 {
-  margin-top: 20px; /* Espaciado superior para los subtítulos */
-  color: #007bff; /* Color azul para los subtítulos */
+  margin-top: 20px; 
+  color: #007bff; 
 }
 
 .mission-card p, .mission-card strong {
-  color: #495057; /* Color gris para texto secundario */
-  line-height: 1.5; /* Mejora la legibilidad con espaciado entre líneas */
+  color: #495057;
+  line-height: 1.5;
 }

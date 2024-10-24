@@ -1,17 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-
+import "../../styles/reviewCardStyle.css"
+import Card from 'react-bootstrap/Card';
 
 export default function ReviewCard({ id, reviewer, reviewed, transaction, rating, comment }) {
   return (
-    <div style={{ cursor: 'pointer', border: '1px solid #ccc', padding: '10px', margin: '10px' }}>
-      <Link to={`/review/${id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-        <h3>Reseña de: {reviewer.username}</h3> 
-        <p>Reseña para: {reviewed.username}</p> 
-        <p>Transacción: {transaction.description}</p> 
+    <Card className="review-card" style={{ cursor: 'pointer', margin: '10px' }}>
+    <Link to={`/review/${id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <Card.Body>
+        <h3>Revisor: {reviewer}</h3>
+        <p>Revisado: {reviewed}</p>
+        <p>Transacción: {transaction}</p>
         <p>Calificación: {rating}</p>
         <p>Comentario: {comment}</p>
-      </Link>
-    </div>
+      </Card.Body>
+    </Link>
+  </Card>
   )
 }

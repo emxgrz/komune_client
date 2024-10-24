@@ -2,6 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import service from '../services/config.js';
 import { AuthContext } from "../context/auth.context.jsx"; 
+import { Button, Form, Card } from 'react-bootstrap';
+import "../styles/reviewDetailsStyle.css"
+
 
 function ReviewDetails() {
   const { id } = useParams(); 
@@ -87,40 +90,41 @@ function ReviewDetails() {
   }
 
   return (
-    <div>
+    <Card className="review-card p-4 mt-4">
       <h2>Detalles de la Reseña</h2>
       {review ? (
         <div>
           {isEditing ? (
-            <form onSubmit={handleEdit}>
-              <div>
-                <label htmlFor="rating">Calificación:</label>
-                <input
+            <Form onSubmit={handleEdit}>
+              <Form.Group controlId="rating">
+                <Form.Label>Calificación:</Form.Label>
+                <Form.Control
                   type="number"
-                  id="rating"
                   name="rating"
                   value={formData.rating}
                   onChange={handleChange}
                   required
                 />
-              </div>
+              </Form.Group>
 
-              <div>
-                <label htmlFor="comment">Comentario:</label>
-                <textarea
-                  id="comment"
+              <Form.Group controlId="comment">
+                <Form.Label>Comentario:</Form.Label>
+                <Form.Control
+                  as="textarea"
                   name="comment"
                   value={formData.comment}
                   onChange={handleChange}
                   required
                 />
-              </div>
+              </Form.Group>
 
-              <button type="submit">Guardar Cambios</button>
-              <button type="button" onClick={() => setIsEditing(false)}>
-                Cancelar
-              </button>
-            </form>
+              <div className="button-group">
+                <Button variant="primary" type="submit">Guardar Cambios</Button>
+                <Button variant="secondary" type="button" onClick={() => setIsEditing(false)}>
+                  Cancelar
+                </Button>
+              </div>
+            </Form>
           ) : (
             <div>
               <h3>Calificación: {review.rating}</h3>
@@ -129,9 +133,9 @@ function ReviewDetails() {
               <p>Reseñado por: {review.reviewer.username}</p>
 
               {loggedUserId === review.reviewer._id && (
-                <div>
-                  <button onClick={() => setIsEditing(true)}>Editar</button>
-                  <button onClick={handleDelete}>Eliminar</button>
+                <div className="button-group mt-3">
+                  <Button variant="warning" onClick={() => setIsEditing(true)}>Editar</Button>
+                  <Button variant="danger" onClick={handleDelete}>Eliminar</Button>
                 </div>
               )}
             </div>
@@ -140,7 +144,7 @@ function ReviewDetails() {
       ) : (
         <p>No se encontraron detalles de la reseña.</p>
       )}
-    </div>
+    </Card>
   );
 }
 
