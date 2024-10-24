@@ -49,7 +49,6 @@ function ReviewList() {
 
   return (
     <div className="review-list">
-      {/* <h2>Lista de Reseñas</h2> */}
       {reviews.length === 0 ? (
         <p className="no-reviews-message">
   📭 No hay reseñas disponibles.

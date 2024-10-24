@@ -84,17 +84,6 @@ function CreateTransactionForm() {
               />
             </Form.Group>
 
-            {/* <Form.Group controlId="formStatus" className="mb-3">
-              <Form.Label>Estado 📂</Form.Label>
-              <Form.Select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option value="en progreso...">Pendiente ⏯️</option>
-                <option value="completado">Completado ✅</option>
-                <option value="cancelado">Cancelado ⭕</option>
-              </Form.Select>
-            </Form.Group> */}
 
             <div className="text-center">
               <Button variant="primary" type="submit" disabled={loading}>

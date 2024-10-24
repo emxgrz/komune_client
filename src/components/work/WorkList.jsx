@@ -47,13 +47,11 @@ function WorkList({userId}) {
 
   return (
     <div className="work-list mt-5">
-      {/* <h2 className="text-center mb-4">Lista de Trabajos</h2> */}
+      
       {works.length === 0 ? (
-        <Card className="text-center">
-          <Card.Body>
-            <Card.Text>No hay trabajos disponibles.</Card.Text>
-          </Card.Body>
-        </Card>
+        <p className="no-reviews-message">
+  📭 No hay trabajos disponibles.
+</p>
       ) : (
         <div className="row">
           {works.map((work) => (
