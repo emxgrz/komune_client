@@ -22,11 +22,7 @@ function UserDetails() {
         console.log(response.data);
         setUser(response.data);
       } catch (error) {
-        if (error.response?.status === 500) {
           navigate("/error");
-        } else {
-          setError(error.response?.data?.message || "Ocurrió un error");
-        }
       } finally {
         setLoading(false);
       }
@@ -114,7 +110,7 @@ function UserDetails() {
               )}
               {user.description && (
                 <div className="mb-3 d-flex">
-                  <div style={{ width: "150px" }}>
+                  <div style={{ width: "120px" }}>
                     <Badge bg="primary" className="badge-fixed">Descripción</Badge>
                   </div>
                   <div style={{border:"1.5px solid grey", padding:"2px", borderRadius:"5px"}}>{user.description}</div>

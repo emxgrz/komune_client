@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { spread } from "axios";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import searchIcon from "../assets/images/icons8-search-64.png"
 
 function NavbarNew() {
   const navigate = useNavigate();
@@ -49,22 +50,22 @@ function NavbarNew() {
             {" "}
             {!isLoggedIn && (
               <Nav.Link as={Link} to="/our-mission" className="nav-button">
-                our mission
+                SOBRE NOSOTROS
               </Nav.Link>
             )}
             {!isLoggedIn && (
               <Nav.Link as={Link} to="/signup" className="nav-button">
-                registro
+                REGISTRO
               </Nav.Link>
             )}
             {!isLoggedIn && (
               <Nav.Link as={Link} to="/login" className="nav-button">
-                acceso
+                ACCESO
               </Nav.Link>
             )}
             {isLoggedIn && (
               <Nav.Link as={Link} to={`/search`} className="nav-button">
-                search
+                <img src={searchIcon} style={{width:"22px"}} alt="search icon" />
               </Nav.Link>
             )}
             {isLoggedIn && (
@@ -73,7 +74,7 @@ function NavbarNew() {
                 to={`/my-transactions`}
                 className="nav-button"
               >
-                transactions
+                OPERACIONES
               </Nav.Link>
             )}
             {isLoggedIn && (
@@ -82,12 +83,12 @@ function NavbarNew() {
                 to={`/my-page/${loggedUserId}`}
                 className="nav-button"
               >
-                perfil
+                PERFIL
               </Nav.Link>
             )}
             {isLoggedIn && (
               <Nav.Link onClick={handleLogout} className="nav-button">
-                cerrar sesión
+                CERRAR SESIÓN
               </Nav.Link>
             )}
           </Nav>

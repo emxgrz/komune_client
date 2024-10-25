@@ -39,8 +39,8 @@ export default function EnterPage() {
           </Row>
           <Row className="w-100 mt-4">
             <Col className="text-center">
-              <Button variant="primary" size="lg" href="/signup">
-                ¡Empieza ya!
+              <Button variant="primary" size="lg" href="/signup" style={{fontWeight:"bold"}}>
+                ¡EMPIEZA YA!
               </Button>
             </Col>
           </Row>

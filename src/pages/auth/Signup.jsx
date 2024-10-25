@@ -35,13 +35,9 @@ function Signup() {
       console.log(error);
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.message);
-      } else {
-        if (error.response?.status === 500) {
-          navigate("/error");
-        } else {
+      }  else {
           setError(error.response?.data?.message || "Ocurrió un error");
         }
-      }
     } finally {
       setLoading(false);
     }

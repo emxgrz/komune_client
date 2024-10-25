@@ -9,6 +9,8 @@ function CreateWorkForm() {
   const [description, setDescription] = useState("");
   const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const { loggedUserId } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -28,11 +30,9 @@ function CreateWorkForm() {
       console.log("Nuevo trabajo creado:", response.data);
       navigate("/home");
     } catch (error) {
-      if (error.response?.status === 500) {
-        navigate("/error");
-      } else {
+      setError(error)
         setError(error.response?.data?.message || "Ocurrió un error");
-      }
+      
     } finally {
       setLoading(false);
     }

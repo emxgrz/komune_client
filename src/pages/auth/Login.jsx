@@ -14,6 +14,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -36,15 +37,11 @@ function Login() {
       navigate(`/home`);
     } catch (error) {
       console.log(error);
-      if (error.response?.status === 500) {
-        navigate("/error");
-      } else {
         setError(error.response?.data?.message || "Ocurrió un error");
-      }
     } finally {
       setLoading(false);
     }
-  };
+  };     
 
   return (
     <Container className="mt-5 d-flex justify-content-center">

@@ -32,6 +32,7 @@ function TransactionDetails() {
     const fetchTransaction = async () => {
       try {
         const response = await service.get(`/transaction/${id}`);
+        console.log(response.data)
         setTransaction(response.data);
       } catch (error) {
         setError("Transacción no encontrada.");
@@ -53,11 +54,7 @@ function TransactionDetails() {
   }
 
   if (error) {
-    if (error.response?.status === 500) {
-      navigate("/error");
-    } else {
-      setError(error.response?.data?.message || "Ocurrió un error");
-    }
+    navigate("/error");
   }
 
   return (
@@ -77,7 +74,7 @@ function TransactionDetails() {
 
             <div className="d-flex justify-content-between align-items-center">
               <div>
-                <h4>👨‍💼 Detalles del Profesional</h4>
+                <h4>👨‍💼 Detalles del profesional</h4>
                 <Card.Subtitle className="mb-2 text-muted">
                   Profesional:{" "}
                   <Link
@@ -89,7 +86,7 @@ function TransactionDetails() {
                 </Card.Subtitle>
               </div>
               <div>
-                <h4>👤 Detalles del Cliente</h4>
+                <h4>👤 Detalles del cliente</h4>
                 <Card.Subtitle className="mb-2 text-muted">
                   Cliente:{" "}
                   <Link
@@ -105,7 +102,7 @@ function TransactionDetails() {
             <Card className="mt-4 transaction-card text-center">
               <Card.Body>
                 <Card.Title className="mb-3">
-                  <strong>Detalles de la Transacción</strong>
+                  <strong>Detalles de la oferta</strong>
                 </Card.Title>
                 <div className="transaction-details">
                   <span className="transaction-label">
@@ -170,15 +167,16 @@ function TransactionDetails() {
               )}
             </Card>
 
-            {transaction.status === "completado" && (
-              <Link
-                to={`/review-form/${transaction._id}/${transaction.professional._id}`}
-              >
-                <Button variant="primary" className="mt-3">
-                  Dejar una Reseña 📝
-                </Button>
-              </Link>
-            )}
+            {transaction.status === "completado" &&
+              transaction.client._id === loggedUserId && (
+                <Link
+                  to={`/review-form/${transaction._id}/${transaction.professional._id}`}
+                >
+                  <Button variant="primary" className="mt-3">
+                    Dejar una Reseña 📝
+                  </Button>
+                </Link>
+              )}
           </Card.Body>
         </Card>
       ) : (

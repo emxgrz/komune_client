@@ -29,11 +29,7 @@ function ReviewDetails() {
           comment: response.data.comment,
         });
       } catch (error) {
-        if (error.response?.status === 500) {
-          navigate("/error");
-        } else {
-          setError(error.response?.data?.message || "Ocurrió un error");
-        }
+        navigate("/error");
       } finally {
         setLoading(false);
       }

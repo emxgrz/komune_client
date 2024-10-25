@@ -19,6 +19,8 @@ function CreateReviewForm() {
   const { transactionId } = useParams();
   const { userId } = useParams();
 
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!transactionId || !loggedUserId || !rating) {
@@ -51,19 +53,17 @@ function CreateReviewForm() {
       setComment("");
       navigate(`/my-page/${loggedUserId}`);
     } catch (error) {
-      if (error.response?.status === 500) {
-        navigate("/error");
-      } else {
         setError(error.response?.data?.message || "Ocurrió un error");
-      }
     } finally {
       setLoading(false);
     }
   };
 
+
+
   return (
     <Container className="mt-5">
-      <h2 className="text-center mb-4">🌟 Crear Reseña 🌟</h2>
+      <h2 className="text-center mb-4">🌟 Crear reseña 🌟</h2>
       {error && (
         <Alert variant="danger">
           Lo sentimos, algo no está funcionando como debería...

@@ -4,7 +4,6 @@ import "../styles/missionStyle.css";
 const OurMission = () => {
   return (
     <Container className="mt-5">
-      <h1 className="mb-4 text-center mission-title">OUR MISSION</h1>
 
       {/* Carousel para textos en movimiento */}
       <Carousel className="mb-4">
@@ -101,10 +100,9 @@ const OurMission = () => {
             ¡Juntos podemos construir una comunidad donde la colaboración sea la
             norma!
           </Card.Text>
-          <Button variant="primary" href="/signup">
-            ¡Únete Ahora!
-          </Button>{" "}
-          {/* Botón de llamada a la acción */}
+          <Button variant="primary" href="/signup" style={{fontWeight:"bold"}}>
+            ¡ÚNETE AHORA!
+          </Button>
         </Card.Body>
       </Card>
     </Container>

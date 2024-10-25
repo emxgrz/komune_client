@@ -46,11 +46,7 @@ function CreateTransactionForm() {
 
       navigate("/my-transactions");
     } catch (error) {
-      if (error.response?.status === 500) {
-        navigate("/error");
-      } else {
         setError(error.response?.data?.message || "Ocurrió un error");
-      }
     } finally {
       setLoading(false);
     }
